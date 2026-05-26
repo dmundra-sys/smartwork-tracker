@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartWork - Work Allocation & Performance Tracking</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0d0f14;--bg2:#13161e;--bg3:#1a1e29;--bg4:#222736;
+--border:#2a2f3d;--border2:#363c4f;
+--text:#e8eaf0;--text2:#9ca3b0;--text3:#5c6272;
+--blue:#4f8ef7;--blue2:#3a6fd4;--blue3:#1a3a7a;
+--green:#3ecf6a;--green2:#2aaa52;--green3:#1a4a28;
+--amber:#f59e1a;--amber2:#d4830e;--amber3:#5a3500;
+--red:#f05050;--red2:#c73535;--red3:#4a1515;
+--purple:#a78bfa;--purple2:#7c5cd4;--purple3:#2d1f5a;
+--teal:#2dd4bf;--teal2:#14a898;--teal3:#0a3a35;
+--radius:8px;--radius2:12px;--radius3:16px;
+--shadow:0 4px 24px rgba(0,0,0,0.4);
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+#app{display:flex;height:100vh;overflow:hidden}
+.sidebar{width:240px;min-width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;transition:width 0.3s}
+.sidebar.collapsed{width:64px;min-width:64px}
+.sidebar-brand{padding:20px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.brand-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.brand-text{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden}
+.brand-sub{font-size:10px;color:var(--text3);font-weight:400}
+.sidebar-nav{flex:1;padding:12px 8px;overflow-y:auto}
+.nav-section{font-size:10px;color:var(--text3);padding:8px 8px 4px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;overflow:hidden}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--radius);cursor:pointer;color:var(--text2);font-size:13px;font-weight:500;transition:all 0.15s;white-space:nowrap;overflow:hidden;margin-bottom:2px}
+.nav-item:hover{background:var(--bg3);color:var(--text)}
+.nav-item.active{background:var(--blue3);color:var(--blue);border:1px solid rgba(79,142,247,0.2)}
+.nav-icon{width:20px;height:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px}
+.nav-badge{margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;flex-shrink:0}
+.sidebar-user{padding:12px 8px;border-top:1px solid var(--border)}
+.user-card{display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg3);border-radius:var(--radius2);cursor:pointer}
+.user-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.user-info{overflow:hidden}
+.user-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-role{font-size:11px;color:var(--text3)}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{padding:16px 24px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px}
+.page-title{font-size:18px;font-weight:700;flex:1}
+.topbar-actions{display:flex;align-items:center;gap:10px}
+.btn{padding:8px 16px;border-radius:var(--radius);border:none;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.15s;font-family:inherit}
+.btn-primary{background:var(--blue);color:white}
+.btn-primary:hover{background:var(--blue2)}
+.btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border2)}
+.btn-secondary:hover{background:var(--bg4)}
+.btn-sm{padding:5px 12px;font-size:12px}
+.btn-icon{width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:var(--radius);background:var(--bg3);border:1px solid var(--border);cursor:pointer;color:var(--text2);transition:all 0.15s;font-size:16px}
+.btn-icon:hover{background:var(--bg4);color:var(--text)}
+.content{flex:1;overflow-y:auto;padding:24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:20px}
+.card-sm{padding:14px 16px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-title{font-size:14px;font-weight:600;color:var(--text)}
+.card-sub{font-size:12px;color:var(--text3);margin-top:2px}
+.metric-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;position:relative;overflow:hidden}
+.metric-label{font-size:12px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
+.metric-value{font-size:28px;font-weight:700;margin:4px 0 2px;line-height:1}
+.metric-change{font-size:12px;color:var(--text3)}
+.metric-icon{position:absolute;right:16px;top:16px;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-pending{background:rgba(245,158,26,0.15);color:var(--amber)}
+.badge-progress{background:rgba(79,142,247,0.15);color:var(--blue)}
+.badge-done{background:rgba(62,207,106,0.15);color:var(--green)}
+.badge-overdue{background:rgba(240,80,80,0.15);color:var(--red)}
+.badge-cancelled{background:rgba(92,98,114,0.15);color:var(--text3)}
+.badge-approval{background:rgba(167,139,250,0.15);color:var(--purple)}
+.priority-high{color:var(--red)}
+.priority-medium{color:var(--amber)}
+.priority-low{color:var(--green)}
+.priority-critical{color:#ff6b35}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;color:var(--text3);padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
+td{padding:11px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,0.02)}
+.progress-bar{height:6px;background:var(--bg4);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width 0.3s}
+.avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.avatar-group{display:flex}
+.avatar-group .avatar{margin-left:-8px;border:2px solid var(--bg2)}
+.avatar-group .avatar:first-child{margin-left:0}
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;background:var(--bg4);color:var(--text2);margin-right:4px}
+.input{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:9px 12px;font-size:13px;color:var(--text);font-family:inherit;width:100%;outline:none;transition:border 0.15s}
+.input:focus{border-color:var(--blue)}
+.select{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:9px 12px;font-size:13px;color:var(--text);font-family:inherit;outline:none;cursor:pointer;appearance:none}
+.select:focus{border-color:var(--blue)}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:12px;color:var(--text3);margin-bottom:5px;font-weight:500}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius3);padding:24px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.modal-title{font-size:17px;font-weight:700}
+.tabs{display:flex;gap:4px;background:var(--bg3);padding:4px;border-radius:var(--radius);margin-bottom:20px}
+.tab{padding:7px 14px;border-radius:6px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.tab.active{background:var(--bg);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+.notification-dot{width:8px;height:8px;background:var(--red);border-radius:50%;position:absolute;top:-2px;right:-2px}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-icon{font-size:40px;margin-bottom:12px}
+.search-box{position:relative;display:flex;align-items:center}
+.search-box input{padding-left:36px}
+.search-icon{position:absolute;left:10px;color:var(--text3);font-size:15px}
+.divider{height:1px;background:var(--border);margin:16px 0}
+.stat-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.stat-row:last-child{border-bottom:none}
+.kanban{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;align-items:flex-start}
+.kanban-col{min-width:240px;background:var(--bg3);border-radius:var(--radius2);padding:12px}
+.kanban-col-header{font-size:13px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.kanban-count{background:var(--bg4);color:var(--text3);font-size:11px;padding:2px 7px;border-radius:10px}
+.kanban-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.15s}
+.kanban-card:hover{border-color:var(--border2);transform:translateY(-1px)}
+.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:20px}
+.login-card{width:100%;max-width:420px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius3);padding:36px}
+.login-brand{text-align:center;margin-bottom:32px}
+.login-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px}
+.user-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.user-btn{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:12px;cursor:pointer;transition:all 0.15s;text-align:center}
+.user-btn:hover{border-color:var(--blue);background:rgba(79,142,247,0.05)}
+.user-btn.selected{border-color:var(--blue);background:rgba(79,142,247,0.1)}
+.chart-bar-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.chart-bar-h .bar-fill{height:20px;border-radius:4px;transition:width 0.5s;background:var(--blue)}
+.chart-bar-h .bar-label{font-size:12px;color:var(--text2);min-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chart-bar-h .bar-val{font-size:12px;color:var(--text3);min-width:28px}
+.donut-wrap{position:relative;display:inline-block}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.activity-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.activity-item:last-child{border-bottom:none}
+.activity-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.activity-content{flex:1}
+.activity-time{font-size:11px;color:var(--text3)}
+.notif-panel{position:fixed;top:0;right:0;height:100vh;width:340px;background:var(--bg2);border-left:1px solid var(--border);z-index:500;transform:translateX(100%);transition:transform 0.3s;overflow-y:auto;padding:20px}
+.notif-panel.open{transform:translateX(0)}
+.notif-item{padding:12px;border-radius:var(--radius);background:var(--bg3);margin-bottom:8px;cursor:pointer}
+.notif-item.unread{border-left:3px solid var(--blue)}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--text2)}
+.perf-bar{height:8px;border-radius:4px;background:var(--bg4);overflow:hidden;margin-top:4px}
+.perf-fill{height:100%;border-radius:4px}
+.filter-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.employee-perf-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.employee-perf-row:last-child{border-bottom:none}
+.rank-badge{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.scroll-x{overflow-x:auto}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"></script>
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback,useMemo}=React;
+
+const USERS=[
+  {id:'mgr',name:'Rajesh Sharma',role:'manager',email:'rajesh@company.com',password:'Boss@123',dept:'Management',designation:'General Manager',mobile:'9876543210',avatar:'RS',color:'#4f8ef7',joining:'2018-04-01'},
+  {id:'e1',name:'Priya Patel',role:'employee',email:'priya@company.com',password:'Emp@1234',dept:'Accounts',designation:'Senior Accountant',mobile:'9876543211',avatar:'PP',color:'#a78bfa',joining:'2019-06-15'},
+  {id:'e2',name:'Amit Kumar',role:'employee',email:'amit@company.com',password:'Emp@1234',dept:'Finance',designation:'Finance Analyst',mobile:'9876543212',avatar:'AK',color:'#3ecf6a',joining:'2020-01-10'},
+  {id:'e3',name:'Sneha Desai',role:'employee',email:'sneha@company.com',password:'Emp@1234',dept:'Compliance',designation:'Compliance Officer',mobile:'9876543213',avatar:'SD',color:'#f59e1a',joining:'2019-09-20'},
+  {id:'e4',name:'Vikram Singh',role:'employee',email:'vikram@company.com',password:'Emp@1234',dept:'Investment',designation:'Investment Manager',mobile:'9876543214',avatar:'VS',color:'#2dd4bf',joining:'2021-03-05'},
+  {id:'e5',name:'Neha Joshi',role:'employee',email:'neha@company.com',password:'Emp@1234',dept:'Administration',designation:'Admin Executive',mobile:'9876543215',avatar:'NJ',color:'#f05050',joining:'2020-07-22'},
+  {id:'e6',name:'Rahul Mehta',role:'employee',email:'rahul@company.com',password:'Emp@1234',dept:'Finance',designation:'Tax Consultant',mobile:'9876543216',avatar:'RM',color:'#ff6b35',joining:'2021-11-01'},
+  {id:'e7',name:'Anjali Verma',role:'employee',email:'anjali@company.com',password:'Emp@1234',dept:'Accounts',designation:'Junior Accountant',mobile:'9876543217',avatar:'AV',color:'#ec4899',joining:'2022-02-14'},
+];
+
+const INIT_TASKS=[
+  {id:'T001',title:'Prepare Q1 Financial Report',desc:'Compile all Q1 financial statements and prepare detailed report for board review.',category:'Finance',dept:'Finance',priority:'Critical',assignedBy:'mgr',assignedTo:['e1','e2'],assignedDate:'2024-03-01',startDate:'2024-03-01',dueDate:'2024-03-31',expectedHours:20,progress:85,status:'In Progress',comments:[{user:'e1',text:'Draft ready, pending final review',time:'2024-03-20 10:30'}],attachments:[],reviewNotes:'',actualHours:18,completedDate:null,fy:'2024-25'},
+  {id:'T002',title:'GST Filing March 2024',desc:'Complete GST return filing for March 2024 including GSTR-1 and GSTR-3B.',category:'Compliance',dept:'Compliance',priority:'High',assignedBy:'mgr',assignedTo:['e3'],assignedDate:'2024-03-15',startDate:'2024-03-15',dueDate:'2024-04-10',expectedHours:8,progress:100,status:'Waiting for Approval',comments:[{user:'e3',text:'Filed successfully, awaiting confirmation',time:'2024-04-08 15:00'}],attachments:['gst_march.pdf'],reviewNotes:'',actualHours:7,completedDate:'2024-04-08',fy:'2024-25'},
+  {id:'T003',title:'Portfolio Review - Q1',desc:'Review investment portfolio performance and prepare summary for management.',category:'Investment',dept:'Investment',priority:'High',assignedBy:'mgr',assignedTo:['e4'],assignedDate:'2024-03-05',startDate:'2024-03-10',dueDate:'2024-03-28',expectedHours:16,progress:60,status:'Overdue',comments:[],attachments:[],reviewNotes:'',actualHours:10,completedDate:null,fy:'2024-25'},
+  {id:'T004',title:'Office Renovation Coordination',desc:'Coordinate with vendors for office renovation. Get quotes and finalize schedule.',category:'Administration',dept:'Administration',priority:'Medium',assignedBy:'mgr',assignedTo:['e5'],assignedDate:'2024-03-10',startDate:'2024-03-12',dueDate:'2024-04-15',expectedHours:12,progress:30,status:'In Progress',comments:[{user:'e5',text:'Got 3 vendor quotes, comparing',time:'2024-03-22 09:00'}],attachments:['vendor_quotes.xlsx'],reviewNotes:'',actualHours:5,completedDate:null,fy:'2024-25'},
+  {id:'T005',title:'Income Tax Assessment FY23',desc:'Prepare documents and respond to income tax assessment notices for FY 2022-23.',category:'Tax',dept:'Finance',priority:'Critical',assignedBy:'mgr',assignedTo:['e6','e1'],assignedDate:'2024-02-20',startDate:'2024-02-22',dueDate:'2024-03-20',expectedHours:24,progress:100,status:'Completed',comments:[{user:'e6',text:'Response submitted to department',time:'2024-03-18 14:00'}],attachments:['it_response.pdf'],reviewNotes:'Good work, timely completion',actualHours:22,completedDate:'2024-03-18',fy:'2024-25'},
+  {id:'T006',title:'Board Meeting Minutes',desc:'Prepare and circulate minutes of the last board meeting with action items.',category:'Administration',dept:'Administration',priority:'Medium',assignedBy:'mgr',assignedTo:['e7'],assignedDate:'2024-04-01',startDate:'2024-04-01',dueDate:'2024-04-05',expectedHours:4,progress:100,status:'Completed',comments:[],attachments:['minutes_mar24.docx'],reviewNotes:'Approved',actualHours:3.5,completedDate:'2024-04-04',fy:'2024-25'},
+  {id:'T007',title:'Employee PF Compliance',desc:'Ensure all PF contributions are filed and compliance reports submitted for Q4.',category:'HR Compliance',dept:'Accounts',priority:'High',assignedBy:'mgr',assignedTo:['e1','e7'],assignedDate:'2024-04-05',startDate:'2024-04-06',dueDate:'2024-04-25',expectedHours:10,progress:20,status:'Pending',comments:[],attachments:[],reviewNotes:'',actualHours:2,completedDate:null,fy:'2024-25'},
+  {id:'T008',title:'MIS Report Preparation',desc:'Monthly MIS report for March 2024 covering all departments.',category:'Management',dept:'Finance',priority:'High',assignedBy:'mgr',assignedTo:['e2'],assignedDate:'2024-04-02',startDate:'2024-04-03',dueDate:'2024-04-08',expectedHours:8,progress:0,status:'Pending',comments:[],attachments:[],reviewNotes:'',actualHours:0,completedDate:null,fy:'2024-25'},
+];
+
+const INIT_ANNOUNCEMENTS=[
+  {id:'a1',title:'Q1 Review Meeting',body:'All team members are required to attend the Q1 review meeting on April 15th at 3 PM in Conference Room A.',date:'2024-04-03',priority:'High',by:'mgr'},
+  {id:'a2',title:'New Leave Policy',body:'Updated leave policy effective from April 1st. Please review the document shared on the portal.',date:'2024-04-01',priority:'Medium',by:'mgr'},
+];
+
+const INIT_LOGS=[
+  {time:'2024-04-08 15:30',user:'e3',action:'Marked task T002 as completed',type:'task'},
+  {time:'2024-04-07 11:00',user:'mgr',action:'Assigned new task T007 to Priya & Anjali',type:'assign'},
+  {time:'2024-04-06 09:15',user:'e5',action:'Added comment on task T004',type:'comment'},
+  {time:'2024-04-05 16:45',user:'e4',action:'Updated progress on T003 to 60%',type:'update'},
+  {time:'2024-04-04 14:00',user:'e7',action:'Completed task T006',type:'task'},
+  {time:'2024-04-03 10:30',user:'mgr',action:'Created announcement: Q1 Review Meeting',type:'announce'},
+];
+
+const DEPTS=['Finance','Accounts','Compliance','Investment','Administration','Management','Tax','HR Compliance'];
+const CATEGORIES=['Finance','Compliance','Tax','Investment','Administration','Management','HR Compliance','Operations'];
+const PRIORITIES=['Critical','High','Medium','Low'];
+const STATUSES=['Pending','In Progress','Waiting for Approval','Completed','Rejected','Overdue','Cancelled'];
+
+function getUser(id){return USERS.find(u=>u.id===id)}
+function fmtDate(d){if(!d)return '-';return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}
+function daysDiff(d){if(!d)return 0;return Math.ceil((new Date(d)-new Date())/86400000)}
+
+function Avatar({user,size=30}){
+  const u=typeof user==='string'?getUser(user):user;
+  if(!u)return null;
+  return <div className="avatar" style={{width:size,height:size,background:u.color+'22',color:u.color,fontSize:size*0.36}}>{u.avatar}</div>
+}
+
+function StatusBadge({status}){
+  const map={Pending:'badge-pending','In Progress':'badge-progress','Waiting for Approval':'badge-approval',Completed:'badge-done',Overdue:'badge-overdue',Rejected:'badge-cancelled',Cancelled:'badge-cancelled'};
+  return <span className={`badge ${map[status]||'badge-cancelled'}`}>{status}</span>
+}
+
+function PriorityBadge({p}){
+  const map={Critical:'#ff6b35',High:'#f05050',Medium:'#f59e1a',Low:'#3ecf6a'};
+  return <span style={{color:map[p],fontSize:12,fontWeight:600}}>{p}</span>
+}
+
+function Modal({open,onClose,title,children,width=580}){
+  if(!open)return null;
+  return <div className="modal-overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
+    <div className="modal" style={{maxWidth:width}}>
+      <div className="modal-header">
+        <span className="modal-title">{title}</span>
+        <button className="btn-icon" onClick={onClose} style={{width:28,height:28}}>✕</button>
+      </div>
+      {children}
+    </div>
+  </div>
+}
+
+function DonutChart({values,colors,size=80,thickness=12}){
+  const total=values.reduce((a,b)=>a+b,0)||1;
+  let offset=0;
+  const r=(size/2)-thickness/2;
+  const circ=2*Math.PI*r;
+  const segs=values.map((v,i)=>{
+    const dash=(v/total)*circ;
+    const seg=<circle key={i} cx={size/2} cy={size/2} r={r} fill="none" stroke={colors[i]} strokeWidth={thickness} strokeDasharray={`${dash} ${circ-dash}`} strokeDashoffset={-offset} style={{transition:'all 0.5s'}}/>
+    offset+=dash;
+    return seg;
+  });
+  return <svg width={size} height={size} style={{transform:'rotate(-90deg)'}}>{segs}</svg>
+}
+
+function BarChart({data,color='#4f8ef7',maxW='100%'}){
+  const max=Math.max(...data.map(d=>d.val),1);
+  return <div style={{maxWidth:maxW}}>
+    {data.map((d,i)=><div key={i} className="chart-bar-h">
+      <span className="bar-label">{d.label}</span>
+      <div style={{flex:1,height:20,background:'var(--bg4)',borderRadius:4,overflow:'hidden'}}>
+        <div style={{width:`${(d.val/max)*100}%`,height:'100%',background:d.color||color,borderRadius:4,transition:'width 0.5s'}}/>
+      </div>
+      <span className="bar-val">{d.val}</span>
+    </div>)}
+  </div>
+}
+
+function LoginScreen({onLogin}){
+  const [selected,setSelected]=useState(null);
+  const [pw,setPw]=useState('');
+  const [err,setErr]=useState('');
+  const [step,setStep]=useState(1);
+
+  function tryLogin(){
+    if(!selected){setErr('Select a user');return}
+    const u=USERS.find(x=>x.id===selected);
+    if(pw===u.password){onLogin(u);setErr('')}
+    else setErr('Incorrect password')
+  }
+
+  return <div className="login-screen">
+    <div className="login-card">
+      <div className="login-brand">
+        <div className="login-icon">📊</div>
+        <div style={{fontSize:22,fontWeight:800,letterSpacing:-0.5}}>SmartWork</div>
+        <div style={{fontSize:13,color:'var(--text3)',marginTop:4}}>Work Allocation & Performance System</div>
+      </div>
+      {step===1?<>
+        <div style={{fontSize:13,color:'var(--text2)',marginBottom:12}}>Select your account:</div>
+        <div className="user-grid" style={{gridTemplateColumns:'1fr 1fr',gap:8}}>
+          {USERS.map(u=><div key={u.id} className={`user-btn${selected===u.id?' selected':''}`} onClick={()=>{setSelected(u.id);setErr('')}}>
+            <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:6}}>
+              <div className="avatar" style={{width:36,height:36,background:u.color+'22',color:u.color,fontSize:13}}>{u.avatar}</div>
+              <div style={{fontSize:12,fontWeight:600,color:'var(--text)'}}>{u.name.split(' ')[0]}</div>
+              <div style={{fontSize:10,color:'var(--text3)'}}>{u.role==='manager'?'👔 Manager':'👤 Employee'}</div>
+            </div>
+          </div>)}
+        </div>
+        {err&&<div style={{color:'var(--red)',fontSize:12,marginTop:8}}>{err}</div>}
+        <button className="btn btn-primary" style={{width:'100%',marginTop:16,padding:'12px'}} onClick={()=>{if(selected)setStep(2);else setErr('Select a user')}}>Continue →</button>
+        <div style={{marginTop:16,background:'var(--bg3)',borderRadius:'var(--radius)',padding:'10px 12px'}}>
+          <div style={{fontSize:11,color:'var(--text3)',marginBottom:6}}>Demo Credentials:</div>
+          <div style={{fontSize:11,color:'var(--text2)'}}>Manager: <code style={{color:'var(--blue)'}}>Boss@123</code></div>
+          <div style={{fontSize:11,color:'var(--text2)'}}>Employees: <code style={{color:'var(--green)'}}>Emp@1234</code></div>
+        </div>
+      </>:<>
+        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:20,padding:'12px',background:'var(--bg3)',borderRadius:'var(--radius)'}}>
+          <Avatar user={selected} size={36}/>
+          <div>
+            <div style={{fontSize:14,fontWeight:600}}>{getUser(selected)?.name}</div>
+            <div style={{fontSize:12,color:'var(--text3)'}}>{getUser(selected)?.designation}</div>
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="form-label">Password</label>
+          <input className="input" type="password" placeholder="Enter password" value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==='Enter'&&tryLogin()}/>
+        </div>
+        {err&&<div style={{color:'var(--red)',fontSize:12,marginBottom:8}}>{err}</div>}
+        <button className="btn btn-primary" style={{width:'100%',padding:'12px'}} onClick={tryLogin}>Login →</button>
+        <button className="btn btn-secondary" style={{width:'100%',marginTop:8,padding:'10px'}} onClick={()=>{setStep(1);setPw('');setErr('')}}>← Back</button>
+      </>}
+    </div>
+  </div>
+}
+
+function ManagerDashboard({tasks,logs,announcements}){
+  const employees=USERS.filter(u=>u.role==='employee');
+  const statuses={Pending:0,'In Progress':0,'Completed':0,'Overdue':0,'Waiting for Approval':0};
+  tasks.forEach(t=>{if(statuses[t.status]!==undefined)statuses[t.status]++});
+
+  const empPerf=employees.map(e=>{
+    const assigned=tasks.filter(t=>t.assignedTo.includes(e.id));
+    const done=assigned.filter(t=>t.status==='Completed');
+    const overdue=assigned.filter(t=>t.status==='Overdue');
+    const rate=assigned.length?Math.round((done.length/assigned.length)*100):0;
+    return{...e,assigned:assigned.length,done:done.length,overdue:overdue.length,rate};
+  }).sort((a,b)=>b.rate-a.rate);
+
+  const deptData=DEPTS.slice(0,6).map(d=>({label:d,val:tasks.filter(t=>t.dept===d).length,color:['#4f8ef7','#a78bfa','#3ecf6a','#f59e1a','#2dd4bf','#f05050'][DEPTS.indexOf(d)%6]}));
+
+  return <div>
+    <div className="grid-4" style={{marginBottom:20}}>
+      {[
+        {label:'Total Tasks',val:tasks.length,icon:'📋',color:'var(--blue)',bg:'rgba(79,142,247,0.1)'},
+        {label:'In Progress',val:statuses['In Progress'],icon:'⚡',color:'var(--amber)',bg:'rgba(245,158,26,0.1)'},
+        {label:'Completed',val:statuses['Completed'],icon:'✅',color:'var(--green)',bg:'rgba(62,207,106,0.1)'},
+        {label:'Overdue',val:statuses['Overdue'],icon:'🚨',color:'var(--red)',bg:'rgba(240,80,80,0.1)'},
+      ].map((m,i)=><div key={i} className="metric-card">
+        <div className="metric-icon" style={{background:m.bg,fontSize:18}}>{m.icon}</div>
+        <div className="metric-label">{m.label}</div>
+        <div className="metric-value" style={{color:m.color}}>{m.val}</div>
+        <div className="metric-change">All Financial Years</div>
+      </div>)}
+    </div>
+    <div className="grid-2" style={{marginBottom:20}}>
+      <div className="card">
+        <div className="card-header"><span className="card-title">Task Status Overview</span></div>
+        <div style={{display:'flex',gap:20,alignItems:'center'}}>
+          <DonutChart values={[statuses.Pending,statuses['In Progress'],statuses.Completed,statuses.Overdue,statuses['Waiting for Approval']]} colors={['#f59e1a','#4f8ef7','#3ecf6a','#f05050','#a78bfa']} size={100} thickness={16}/>
+          <div style={{flex:1}}>
+            {[['Pending',statuses.Pending,'#f59e1a'],['In Progress',statuses['In Progress'],'#4f8ef7'],['Completed',statuses.Completed,'#3ecf6a'],['Overdue',statuses.Overdue,'#f05050'],['For Approval',statuses['Waiting for Approval'],'#a78bfa']].map(([l,v,c])=><div key={l} style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
+              <div style={{width:8,height:8,borderRadius:2,background:c,flexShrink:0}}/>
+              <span style={{fontSize:12,color:'var(--text2)',flex:1}}>{l}</span>
+              <span style={{fontSize:13,fontWeight:600,color:'var(--text)'}}>{v}</span>
+            </div>)}
+          </div>
+        </div>
+      </div>
+      <div className="card">
+        <div className="card-header"><span className="card-title">Department Workload</span></div>
+        <BarChart data={deptData.filter(d=>d.val>0)}/>
+      </div>
+    </div>
+    <div className="card" style={{marginBottom:20}}>
+      <div className="card-header">
+        <div><div className="card-title">Employee Performance Rankings</div><div className="card-sub">FY 2024-25</div></div>
+      </div>
+      {empPerf.map((e,i)=><div key={e.id} className="employee-perf-row">
+        <div className="rank-badge" style={{background:i===0?'#f59e1a22':i===1?'#b0b3c022':i===2?'#cd7f3222':'var(--bg4)',color:i===0?'#f59e1a':i===1?'var(--text3)':i===2?'#cd7f32':'var(--text3)'}}>{i+1}</div>
+        <Avatar user={e} size={32}/>
+        <div style={{flex:1}}>
+          <div style={{fontSize:13,fontWeight:600}}>{e.name}</div>
+          <div style={{fontSize:11,color:'var(--text3)'}}>{e.dept} · {e.designation}</div>
+          <div className="perf-bar" style={{marginTop:4,width:200}}>
+            <div className="perf-fill" style={{width:`${e.rate}%`,background:e.rate>=80?'var(--green)':e.rate>=50?'var(--amber)':'var(--red)'}}/>
+          </div>
+        </div>
+        <div style={{textAlign:'right'}}>
+          <div style={{fontSize:18,fontWeight:700,color:e.rate>=80?'var(--green)':e.rate>=50?'var(--amber)':'var(--red)'}}>{e.rate}%</div>
+          <div style={{fontSize:11,color:'var(--text3)'}}>{e.done}/{e.assigned} tasks</div>
+        </div>
+        <div style={{textAlign:'center',background:'rgba(240,80,80,0.1)',borderRadius:6,padding:'4px 10px',minWidth:60}}>
+          <div style={{fontSize:14,fontWeight:700,color:'var(--red)'}}>{e.overdue}</div>
+          <div style={{fontSize:10,color:'var(--text3)'}}>overdue</div>
+        </div>
+      </div>)}
+    </div>
+    <div className="grid-2">
+      <div className="card">
+        <div className="card-header"><span className="card-title">Recent Activity</span></div>
+        {logs.slice(0,5).map((l,i)=><div key={i} className="activity-item">
+          <div className="activity-dot" style={{background:l.type==='task'?'var(--green)':l.type==='assign'?'var(--blue)':l.type==='comment'?'var(--amber)':'var(--purple)'}}/>
+          <div className="activity-content">
+            <div style={{fontSize:13}}>{l.action}</div>
+            <div className="activity-time">{getUser(l.user)?.name} · {l.time}</div>
+          </div>
+        </div>)}
+      </div>
+      <div className="card">
+        <div className="card-header"><span className="card-title">Upcoming Deadlines</span></div>
+        {tasks.filter(t=>t.status!=='Completed'&&t.status!=='Cancelled').sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate)).slice(0,5).map(t=>{
+          const d=daysDiff(t.dueDate);
+          return <div key={t.id} className="stat-row">
+            <div>
+              <div style={{fontSize:13,fontWeight:500}}>{t.title}</div>
+              <div style={{fontSize:11,color:'var(--text3)'}}>{t.id} · {t.dept}</div>
+            </div>
+            <div style={{textAlign:'right'}}>
+              <div style={{fontSize:12,color:d<0?'var(--red)':d<=3?'var(--amber)':'var(--text3)'}}>{d<0?`${Math.abs(d)}d overdue`:d===0?'Today':`${d}d left`}</div>
+              <StatusBadge status={t.status}/>
+            </div>
+          </div>
+        })}
+      </div>
+    </div>
+  </div>
+}
+
+function TaskList({tasks,setTasks,currentUser,logs,setLogs}){
+  const [view,setView]=useState('list');
+  const [filter,setFilter]=useState({status:'',priority:'',dept:'',assignee:'',search:''});
+  const [showCreate,setShowCreate]=useState(false);
+  const [selectedTask,setSelectedTask]=useState(null);
+  const isManager=currentUser.role==='manager';
+
+  const filtered=tasks.filter(t=>{
+    if(!isManager&&!t.assignedTo.includes(currentUser.id))return false;
+    if(filter.status&&t.status!==filter.status)return false;
+    if(filter.priority&&t.priority!==filter.priority)return false;
+    if(filter.dept&&t.dept!==filter.dept)return false;
+    if(filter.assignee&&!t.assignedTo.includes(filter.assignee))return false;
+    if(filter.search&&!t.title.toLowerCase().includes(filter.search.toLowerCase())&&!t.id.toLowerCase().includes(filter.search.toLowerCase()))return false;
+    return true;
+  });
+
+  function updateTask(id,updates){
+    setTasks(prev=>prev.map(t=>t.id===id?{...t,...updates}:t));
+    setLogs(prev=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:currentUser.id,action:`Updated task ${id}`,type:'update'},...prev]);
+  }
+
+  const KanbanView=()=>{
+    const cols=['Pending','In Progress','Waiting for Approval','Completed','Overdue'];
+    return <div className="kanban">
+      {cols.map(col=>{
+        const colTasks=filtered.filter(t=>t.status===col);
+        return <div key={col} className="kanban-col">
+          <div className="kanban-col-header">
+            <StatusBadge status={col}/>
+            <span className="kanban-count">{colTasks.length}</span>
+          </div>
+          {colTasks.map(t=><div key={t.id} className="kanban-card" onClick={()=>setSelectedTask(t)}>
+            <div style={{fontSize:11,color:'var(--text3)',marginBottom:4}}>{t.id}</div>
+            <div style={{fontSize:13,fontWeight:600,marginBottom:8}}>{t.title}</div>
+            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+              <PriorityBadge p={t.priority}/>
+              <div className="avatar-group">
+                {t.assignedTo.slice(0,3).map(uid=><Avatar key={uid} user={uid} size={22}/>)}
+              </div>
+            </div>
+            <div style={{marginTop:8}}>
+              <div className="progress-bar">
+                <div className="progress-fill" style={{width:`${t.progress}%`,background:t.progress===100?'var(--green)':t.progress>50?'var(--blue)':'var(--amber)'}}/>
+              </div>
+              <div style={{fontSize:10,color:'var(--text3)',marginTop:2}}>{t.progress}% · Due {fmtDate(t.dueDate)}</div>
+            </div>
+          </div>)}
+          {colTasks.length===0&&<div style={{fontSize:12,color:'var(--text3)',textAlign:'center',padding:'20px 0'}}>No tasks</div>}
+        </div>
+      })}
+    </div>
+  };
+
+  return <div>
+    <div style={{display:'flex',gap:8,marginBottom:16,alignItems:'center',flexWrap:'wrap'}}>
+      <div className="search-box" style={{flex:1,minWidth:180}}>
+        <span className="search-icon">🔍</span>
+        <input className="input" placeholder="Search tasks..." value={filter.search} onChange={e=>setFilter(f=>({...f,search:e.target.value}))} style={{paddingLeft:34}}/>
+      </div>
+      <select className="select" value={filter.status} onChange={e=>setFilter(f=>({...f,status:e.target.value}))}>
+        <option value="">All Status</option>
+        {STATUSES.map(s=><option key={s}>{s}</option>)}
+      </select>
+      <select className="select" value={filter.priority} onChange={e=>setFilter(f=>({...f,priority:e.target.value}))}>
+        <option value="">All Priority</option>
+        {PRIORITIES.map(p=><option key={p}>{p}</option>)}
+      </select>
+      {isManager&&<select className="select" value={filter.assignee} onChange={e=>setFilter(f=>({...f,assignee:e.target.value}))}>
+        <option value="">All Employees</option>
+        {USERS.filter(u=>u.role==='employee').map(u=><option key={u.id} value={u.id}>{u.name}</option>)}
+      </select>}
+      <div className="tabs" style={{marginBottom:0,gap:2}}>
+        {['list','kanban'].map(v=><div key={v} className={`tab${view===v?' active':''}`} onClick={()=>setView(v)} style={{padding:'6px 12px',fontSize:12}}>{v==='list'?'📋 List':'🎯 Kanban'}</div>)}
+      </div>
+      {isManager&&<button className="btn btn-primary btn-sm" onClick={()=>setShowCreate(true)}>+ New Task</button>}
+    </div>
+    {view==='kanban'?<KanbanView/>:
+    <div className="card" style={{padding:0}}>
+      <div className="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Task ID</th><th>Title</th><th>Priority</th><th>Assigned To</th>
+            <th>Due Date</th><th>Progress</th><th>Status</th><th>Action</th>
+          </tr></thead>
+          <tbody>
+            {filtered.length===0?<tr><td colSpan={8} style={{textAlign:'center',padding:'32px',color:'var(--text3)'}}>No tasks found</td></tr>:
+            filtered.map(t=><tr key={t.id}>
+              <td><code style={{fontSize:11,color:'var(--text3)'}}>{t.id}</code></td>
+              <td>
+                <div style={{fontSize:13,fontWeight:500,cursor:'pointer',color:'var(--blue)'}} onClick={()=>setSelectedTask(t)}>{t.title}</div>
+                <div style={{fontSize:11,color:'var(--text3)'}}>{t.category} · {t.dept}</div>
+              </td>
+              <td><PriorityBadge p={t.priority}/></td>
+              <td><div className="avatar-group">{t.assignedTo.slice(0,3).map(uid=><Avatar key={uid} user={uid} size={26}/>)}{t.assignedTo.length>3&&<div className="avatar" style={{width:26,height:26,background:'var(--bg4)',color:'var(--text3)',fontSize:10}}>+{t.assignedTo.length-3}</div>}</div></td>
+              <td style={{fontSize:12,color:daysDiff(t.dueDate)<0?'var(--red)':daysDiff(t.dueDate)<=3?'var(--amber)':'var(--text2)'}}>{fmtDate(t.dueDate)}</td>
+              <td style={{minWidth:100}}>
+                <div className="progress-bar">
+                  <div className="progress-fill" style={{width:`${t.progress}%`,background:t.progress===100?'var(--green)':t.progress>50?'var(--blue)':'var(--amber)'}}/>
+                </div>
+                <div style={{fontSize:10,color:'var(--text3)',marginTop:2}}>{t.progress}%</div>
+              </td>
+              <td><StatusBadge status={t.status}/></td>
+              <td>
+                <button className="btn btn-secondary btn-sm" onClick={()=>setSelectedTask(t)}>View</button>
+                {isManager&&t.status==='Waiting for Approval'&&<button className="btn btn-primary btn-sm" style={{marginLeft:4}} onClick={()=>updateTask(t.id,{status:'Completed',completedDate:new Date().toISOString().slice(0,10)})}>✓ Approve</button>}
+              </td>
+            </tr>)}
+          </tbody>
+        </table>
+      </div>
+    </div>}
+    {showCreate&&<CreateTaskModal onClose={()=>setShowCreate(false)} onSave={(task)=>{setTasks(prev=>[task,...prev]);setLogs(prev=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:currentUser.id,action:`Created task ${task.id}: ${task.title}`,type:'assign'},...prev]);setShowCreate(false)}}/>}
+    {selectedTask&&<TaskDetailModal task={selectedTask} onClose={()=>setSelectedTask(null)} onUpdate={(updates)=>{updateTask(selectedTask.id,updates);setSelectedTask(null)}} currentUser={currentUser}/>}
+  </div>
+}
+
+function CreateTaskModal({onClose,onSave}){
+  const [form,setForm]=useState({title:'',desc:'',category:'Finance',dept:'Finance',priority:'High',assignedTo:[],startDate:'',dueDate:'',expectedHours:8,fy:'2024-25'});
+  const [err,setErr]=useState('');
+  function f(k,v){setForm(p=>({...p,[k]:v}))}
+  function toggleEmp(id){setForm(p=>({...p,assignedTo:p.assignedTo.includes(id)?p.assignedTo.filter(x=>x!==id):[...p.assignedTo,id]}))}
+  function save(){
+    if(!form.title.trim()){setErr('Title required');return}
+    if(form.assignedTo.length===0){setErr('Assign to at least one employee');return}
+    if(!form.dueDate){setErr('Due date required');return}
+    const id='T'+String(Math.floor(Math.random()*900)+100);
+    onSave({...form,id,assignedBy:'mgr',assignedDate:new Date().toISOString().slice(0,10),progress:0,status:'Pending',comments:[],attachments:[],reviewNotes:'',actualHours:0,completedDate:null});
+  }
+  return <Modal open title="Create New Task" onClose={onClose}>
+    <div className="form-group"><label className="form-label">Task Title *</label><input className="input" value={form.title} onChange={e=>f('title',e.target.value)}/></div>
+    <div className="form-group"><label className="form-label">Description</label><textarea className="input" rows={3} value={form.desc} onChange={e=>f('desc',e.target.value)} style={{resize:'vertical'}}/></div>
+    <div className="grid-2">
+      <div className="form-group"><label className="form-label">Category</label><select className="select input" value={form.category} onChange={e=>f('category',e.target.value)}>{CATEGORIES.map(c=><option key={c}>{c}</option>)}</select></div>
+      <div className="form-group"><label className="form-label">Department</label><select className="select input" value={form.dept} onChange={e=>f('dept',e.target.value)}>{DEPTS.map(d=><option key={d}>{d}</option>)}</select></div>
+    </div>
+    <div className="grid-2">
+      <div className="form-group"><label className="form-label">Priority</label><select className="select input" value={form.priority} onChange={e=>f('priority',e.target.value)}>{PRIORITIES.map(p=><option key={p}>{p}</option>)}</select></div>
+      <div className="form-group"><label className="form-label">Financial Year</label><select className="select input" value={form.fy} onChange={e=>f('fy',e.target.value)}>{['2024-25','2023-24','2025-26'].map(y=><option key={y}>{y}</option>)}</select></div>
+    </div>
+    <div className="grid-2">
+      <div className="form-group"><label className="form-label">Start Date</label><input className="input" type="date" value={form.startDate} onChange={e=>f('startDate',e.target.value)}/></div>
+      <div className="form-group"><label className="form-label">Due Date *</label><input className="input" type="date" value={form.dueDate} onChange={e=>f('dueDate',e.target.value)}/></div>
+    </div>
+    <div className="form-group"><label className="form-label">Expected Hours</label><input className="input" type="number" value={form.expectedHours} onChange={e=>f('expectedHours',+e.target.value)}/></div>
+    <div className="form-group">
+      <label className="form-label">Assign To * (select one or more)</label>
+      <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
+        {USERS.filter(u=>u.role==='employee').map(u=><div key={u.id} onClick={()=>toggleEmp(u.id)} style={{display:'flex',alignItems:'center',gap:6,padding:'6px 10px',border:`1px solid ${form.assignedTo.includes(u.id)?u.color:'var(--border)'}`,background:form.assignedTo.includes(u.id)?u.color+'15':'var(--bg3)',borderRadius:'var(--radius)',cursor:'pointer',transition:'all 0.15s'}}>
+          <Avatar user={u} size={22}/>
+          <span style={{fontSize:12}}>{u.name.split(' ')[0]}</span>
+        </div>)}
+      </div>
+    </div>
+    {err&&<div style={{color:'var(--red)',fontSize:12,marginBottom:8}}>{err}</div>}
+    <div style={{display:'flex',gap:8,justifyContent:'flex-end'}}>
+      <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
+      <button className="btn btn-primary" onClick={save}>Create Task</button>
+    </div>
+  </Modal>
+}
+
+function TaskDetailModal({task,onClose,onUpdate,currentUser}){
+  const [comment,setComment]=useState('');
+  const [progress,setProgress]=useState(task.progress);
+  const [status,setStatus]=useState(task.status);
+  const [reviewNote,setReviewNote]=useState(task.reviewNotes||'');
+  const [comments,setComments]=useState(task.comments||[]);
+  const isManager=currentUser.role==='manager';
+
+  function addComment(){
+    if(!comment.trim())return;
+    const nc={user:currentUser.id,text:comment,time:new Date().toISOString().slice(0,16).replace('T',' ')};
+    setComments(p=>[...p,nc]);
+    setComment('');
+  }
+  function save(){
+    onUpdate({progress,status,reviewNotes:reviewNote,comments,completedDate:status==='Completed'?new Date().toISOString().slice(0,10):task.completedDate});
+  }
+
+  return <Modal open title={`Task Details — ${task.id}`} onClose={onClose} width={640}>
+    <div style={{background:'var(--bg3)',borderRadius:'var(--radius)',padding:'14px 16px',marginBottom:16}}>
+      <div style={{fontSize:16,fontWeight:700,marginBottom:8}}>{task.title}</div>
+      <div style={{display:'flex',flexWrap:'wrap',gap:8,marginBottom:8}}>
+        <StatusBadge status={task.status}/>
+        <PriorityBadge p={task.priority}/>
+        <span className="tag">{task.category}</span>
+        <span className="tag">{task.dept}</span>
+        <span className="tag">FY {task.fy}</span>
+      </div>
+      <p style={{fontSize:13,color:'var(--text2)',lineHeight:1.6}}>{task.desc||'No description provided.'}</p>
+    </div>
+    <div className="grid-2" style={{marginBottom:16}}>
+      {[['Assigned By',getUser(task.assignedBy)?.name],['Due Date',fmtDate(task.dueDate)],['Expected Hrs',task.expectedHours+'h'],['Actual Hrs',task.actualHours+'h']].map(([k,v])=><div key={k}>
+        <div style={{fontSize:11,color:'var(--text3)'}}>{k}</div>
+        <div style={{fontSize:13,fontWeight:500,marginTop:2}}>{v}</div>
+      </div>)}
+    </div>
+    <div style={{marginBottom:16}}>
+      <div style={{fontSize:12,color:'var(--text3)',marginBottom:6}}>Assigned To</div>
+      <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+        {task.assignedTo.map(uid=>{const u=getUser(uid);return u?<div key={uid} style={{display:'flex',alignItems:'center',gap:6,padding:'4px 10px',background:u.color+'15',border:`1px solid ${u.color}40`,borderRadius:20}}>
+          <Avatar user={u} size={20}/>
+          <span style={{fontSize:12}}>{u.name}</span>
+        </div>:null})}
+      </div>
+    </div>
+    <div style={{marginBottom:16}}>
+      <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}>
+        <span style={{fontSize:12,color:'var(--text3)'}}>Progress</span>
+        <span style={{fontSize:12,fontWeight:600,color:'var(--blue)'}}>{progress}%</span>
+      </div>
+      {(isManager||task.assignedTo.includes(currentUser.id))&&<input type="range" min={0} max={100} step={5} value={progress} onChange={e=>setProgress(+e.target.value)} style={{width:'100%'}}/>}
+      <div className="progress-bar" style={{marginTop:4,height:8}}>
+        <div className="progress-fill" style={{width:`${progress}%`,background:progress===100?'var(--green)':progress>50?'var(--blue)':'var(--amber)'}}/>
+      </div>
+    </div>
+    {(isManager||task.assignedTo.includes(currentUser.id))&&<div className="form-group">
+      <label className="form-label">Update Status</label>
+      <select className="select input" value={status} onChange={e=>setStatus(e.target.value)}>
+        {STATUSES.map(s=><option key={s}>{s}</option>)}
+      </select>
+    </div>}
+    {isManager&&<div className="form-group">
+      <label className="form-label">Review Notes</label>
+      <textarea className="input" rows={2} value={reviewNote} onChange={e=>setReviewNote(e.target.value)} placeholder="Add review notes..." style={{resize:'vertical'}}/>
+    </div>}
+    <div style={{marginBottom:16}}>
+      <div style={{fontSize:12,color:'var(--text3)',marginBottom:8}}>Comments ({comments.length})</div>
+      {comments.map((c,i)=><div key={i} style={{display:'flex',gap:8,marginBottom:8,padding:'8px',background:'var(--bg3)',borderRadius:'var(--radius)'}}>
+        <Avatar user={c.user} size={28}/>
+        <div style={{flex:1}}>
+          <div style={{display:'flex',gap:8,alignItems:'center',marginBottom:2}}>
+            <span style={{fontSize:12,fontWeight:600}}>{getUser(c.user)?.name}</span>
+            <span style={{fontSize:11,color:'var(--text3)'}}>{c.time}</span>
+          </div>
+          <div style={{fontSize:13,color:'var(--text2)'}}>{c.text}</div>
+        </div>
+      </div>)}
+      <div style={{display:'flex',gap:8}}>
+        <input className="input" placeholder="Add a comment..." value={comment} onChange={e=>setComment(e.target.value)} onKeyDown={e=>e.key==='Enter'&&addComment()} style={{flex:1}}/>
+        <button className="btn btn-primary btn-sm" onClick={addComment}>Add</button>
+      </div>
+    </div>
+    <div style={{display:'flex',gap:8,justifyContent:'flex-end'}}>
+      <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
+      <button className="btn btn-primary" onClick={save}>Save Changes</button>
+    </div>
+  </Modal>
+}
+
+function EmployeeDashboard({emp,tasks}){
+  const myTasks=tasks.filter(t=>t.assignedTo.includes(emp.id));
+  const done=myTasks.filter(t=>t.status==='Completed');
+  const overdue=myTasks.filter(t=>t.status==='Overdue');
+  const inprog=myTasks.filter(t=>t.status==='In Progress');
+  const pending=myTasks.filter(t=>t.status==='Pending');
+  const rate=myTasks.length?Math.round((done.length/myTasks.length)*100):0;
+  const avgHrs=done.length?Math.round(done.reduce((a,t)=>a+(t.actualHours||0),0)/done.length):0;
+
+  return <div>
+    <div style={{display:'flex',alignItems:'center',gap:16,marginBottom:24,background:'var(--bg2)',border:'1px solid var(--border)',borderRadius:'var(--radius2)',padding:'20px'}}>
+      <div className="avatar" style={{width:56,height:56,background:emp.color+'22',color:emp.color,fontSize:20}}>{emp.avatar}</div>
+      <div style={{flex:1}}>
+        <div style={{fontSize:20,fontWeight:700}}>{emp.name}</div>
+        <div style={{fontSize:13,color:'var(--text3)'}}>{emp.designation} · {emp.dept}</div>
+        <div style={{display:'flex',gap:12,marginTop:8}}>
+          <span className="chip">📧 {emp.email}</span>
+          <span className="chip">📱 {emp.mobile}</span>
+        </div>
+      </div>
+      <div style={{textAlign:'center',background:'var(--bg3)',borderRadius:'var(--radius2)',padding:'16px 24px'}}>
+        <div style={{fontSize:32,fontWeight:800,color:rate>=80?'var(--green)':rate>=50?'var(--amber)':'var(--red)'}}>{rate}%</div>
+        <div style={{fontSize:12,color:'var(--text3)'}}>Completion Rate</div>
+        <div style={{fontSize:11,color:'var(--text3)',marginTop:4}}>FY 2024-25</div>
+      </div>
+    </div>
+    <div className="grid-4" style={{marginBottom:20}}>
+      {[
+        {l:'Assigned',v:myTasks.length,c:'var(--blue)',bg:'rgba(79,142,247,0.1)',i:'📋'},
+        {l:'In Progress',v:inprog.length,c:'var(--amber)',bg:'rgba(245,158,26,0.1)',i:'⚡'},
+        {l:'Completed',v:done.length,c:'var(--green)',bg:'rgba(62,207,106,0.1)',i:'✅'},
+        {l:'Overdue',v:overdue.length,c:'var(--red)',bg:'rgba(240,80,80,0.1)',i:'🚨'},
+      ].map((m,i)=><div key={i} className="metric-card">
+        <div className="metric-icon" style={{background:m.bg,fontSize:16}}>{m.i}</div>
+        <div className="metric-label">{m.l}</div>
+        <div className="metric-value" style={{color:m.c,fontSize:22}}>{m.v}</div>
+      </div>)}
+    </div>
+    <div className="card" style={{marginBottom:20}}>
+      <div className="card-header"><span className="card-title">My Active Tasks</span></div>
+      {myTasks.filter(t=>t.status!=='Completed'&&t.status!=='Cancelled').length===0?
+        <div className="empty-state"><div className="empty-icon">🎉</div><div>All caught up!</div></div>:
+        myTasks.filter(t=>t.status!=='Completed'&&t.status!=='Cancelled').map(t=><div key={t.id} style={{padding:'12px 0',borderBottom:'1px solid var(--border)'}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}>
+            <div>
+              <div style={{fontSize:13,fontWeight:600}}>{t.title}</div>
+              <div style={{fontSize:11,color:'var(--text3)'}}>{t.id} · {t.dept}</div>
+            </div>
+            <div style={{display:'flex',gap:6,alignItems:'center'}}>
+              <PriorityBadge p={t.priority}/>
+              <StatusBadge status={t.status}/>
+            </div>
+          </div>
+          <div style={{display:'flex',alignItems:'center',gap:8}}>
+            <div className="progress-bar" style={{flex:1}}>
+              <div className="progress-fill" style={{width:`${t.progress}%`,background:t.progress===100?'var(--green)':t.progress>50?'var(--blue)':'var(--amber)'}}/>
+            </div>
+            <span style={{fontSize:11,color:'var(--text3)',minWidth:28}}>{t.progress}%</span>
+            <span style={{fontSize:11,color:daysDiff(t.dueDate)<0?'var(--red)':daysDiff(t.dueDate)<=3?'var(--amber)':'var(--text3)'}}>Due {fmtDate(t.dueDate)}</span>
+          </div>
+        </div>)}
+    </div>
+    <div className="grid-2">
+      <div className="card">
+        <div className="card-header"><span className="card-title">Performance Stats</span></div>
+        {[['Tasks Assigned',myTasks.length],['Tasks Completed',done.length],['Pending Tasks',pending.length],['Overdue Tasks',overdue.length],['Avg Hrs / Task',avgHrs+'h'],['Completion Rate',rate+'%']].map(([k,v])=><div key={k} className="stat-row">
+          <span style={{fontSize:13,color:'var(--text2)'}}>{k}</span>
+          <span style={{fontSize:13,fontWeight:600,color:'var(--text)'}}>{v}</span>
+        </div>)}
+      </div>
+      <div className="card">
+        <div className="card-header"><span className="card-title">Recently Completed</span></div>
+        {done.length===0?<div className="empty-state"><div className="empty-icon">📝</div><div>No completed tasks yet</div></div>:
+          done.slice(0,4).map(t=><div key={t.id} className="stat-row">
+            <div>
+              <div style={{fontSize:13,fontWeight:500}}>{t.title}</div>
+              <div style={{fontSize:11,color:'var(--text3)'}}>Completed {fmtDate(t.completedDate)}</div>
+            </div>
+            <StatusBadge status={t.status}/>
+          </div>)}
+      </div>
+    </div>
+  </div>
+}
+
+function EmployeesPage(){
+  const employees=USERS.filter(u=>u.role==='employee');
+  const [selected,setSelected]=useState(null);
+  return <div>
+    <div className="grid-2">
+    {employees.map(e=><div key={e.id} className="card card-sm" style={{cursor:'pointer'}} onClick={()=>setSelected(selected===e.id?null:e.id)}>
+      <div style={{display:'flex',gap:12,alignItems:'center',marginBottom:12}}>
+        <div className="avatar" style={{width:44,height:44,background:e.color+'22',color:e.color,fontSize:16}}>{e.avatar}</div>
+        <div style={{flex:1}}>
+          <div style={{fontSize:14,fontWeight:700}}>{e.name}</div>
+          <div style={{fontSize:12,color:'var(--text3)'}}>{e.designation}</div>
+        </div>
+        <div style={{background:e.color+'15',color:e.color,fontSize:11,padding:'3px 8px',borderRadius:20,fontWeight:600}}>{e.dept}</div>
+      </div>
+      {selected===e.id&&<>
+        <div className="divider"/>
+        <div className="grid-2" style={{gap:8}}>
+          {[['Employee ID',e.id.toUpperCase()],['Mobile',e.mobile],['Email',e.email],['Joining',fmtDate(e.joining)]].map(([k,v])=><div key={k}>
+            <div style={{fontSize:10,color:'var(--text3)'}}>{k}</div>
+            <div style={{fontSize:12,fontWeight:500,marginTop:1}}>{v}</div>
+          </div>)}
+        </div>
+      </>}
+    </div>)}
+    </div>
+  </div>
+}
+
+function ReportsPage({tasks}){
+  const employees=USERS.filter(u=>u.role==='employee');
+  const [rtype,setRtype]=useState('performance');
+
+  const perfData=employees.map(e=>{
+    const et=tasks.filter(t=>t.assignedTo.includes(e.id));
+    const done=et.filter(t=>t.status==='Completed');
+    const overdue=et.filter(t=>t.status==='Overdue');
+    return{...e,total:et.length,done:done.length,overdue:overdue.length,rate:et.length?Math.round((done.length/et.length)*100):0};
+  }).sort((a,b)=>b.rate-a.rate);
+
+  const deptData=DEPTS.map(d=>({dept:d,total:tasks.filter(t=>t.dept===d).length,done:tasks.filter(t=>t.dept===d&&t.status==='Completed').length})).filter(d=>d.total>0);
+
+  return <div>
+    <div className="tabs" style={{marginBottom:20}}>
+      {[['performance','👤 Performance'],['monthly','📅 Monthly'],['dept','🏢 Department'],['fy','📊 FY Report']].map(([k,l])=><div key={k} className={`tab${rtype===k?' active':''}`} onClick={()=>setRtype(k)}>{l}</div>)}
+    </div>
+    {rtype==='performance'&&<div className="card">
+      <div className="card-header">
+        <div><div className="card-title">Employee Performance Report</div><div className="card-sub">FY 2024-25</div></div>
+        <button className="btn btn-secondary btn-sm">⬇ Export</button>
+      </div>
+      <div className="table-wrap">
+        <table>
+          <thead><tr><th>Rank</th><th>Employee</th><th>Department</th><th>Total Tasks</th><th>Completed</th><th>Overdue</th><th>Rate</th><th>Score</th></tr></thead>
+          <tbody>
+            {perfData.map((e,i)=><tr key={e.id}>
+              <td><div className="rank-badge" style={{background:i<3?'var(--amber)22':'var(--bg4)',color:i<3?'var(--amber)':'var(--text3)'}}>{i+1}</div></td>
+              <td><div style={{display:'flex',alignItems:'center',gap:8}}><Avatar user={e} size={28}/><div><div style={{fontSize:13,fontWeight:500}}>{e.name}</div><div style={{fontSize:11,color:'var(--text3)'}}>{e.designation}</div></div></div></td>
+              <td><span className="tag">{e.dept}</span></td>
+              <td>{e.total}</td>
+              <td style={{color:'var(--green)',fontWeight:600}}>{e.done}</td>
+              <td style={{color:'var(--red)',fontWeight:600}}>{e.overdue}</td>
+              <td><div style={{display:'flex',alignItems:'center',gap:8}}><div className="progress-bar" style={{width:80}}><div className="progress-fill" style={{width:`${e.rate}%`,background:e.rate>=80?'var(--green)':e.rate>=50?'var(--amber)':'var(--red)'}}/></div><span style={{fontSize:12,fontWeight:600,color:e.rate>=80?'var(--green)':e.rate>=50?'var(--amber)':'var(--red)'}}>{e.rate}%</span></div></td>
+              <td><span style={{fontSize:14,fontWeight:700,color:e.rate>=80?'var(--green)':e.rate>=50?'var(--amber)':'var(--red)'}}>{e.rate>=80?'A':e.rate>=60?'B':e.rate>=40?'C':'D'}</span></td>
+            </tr>)}
+          </tbody>
+        </table>
+      </div>
+    </div>}
+    {rtype==='dept'&&<div className="card">
+      <div className="card-header"><div className="card-title">Department-wise Report</div><button className="btn btn-secondary btn-sm">⬇ Export</button></div>
+      <div className="table-wrap">
+        <table>
+          <thead><tr><th>Department</th><th>Total Tasks</th><th>Completed</th><th>Pending</th><th>Completion Rate</th></tr></thead>
+          <tbody>
+            {deptData.map(d=><tr key={d.dept}>
+              <td style={{fontWeight:500}}>{d.dept}</td>
+              <td>{d.total}</td>
+              <td style={{color:'var(--green)',fontWeight:600}}>{d.done}</td>
+              <td style={{color:'var(--amber)',fontWeight:600}}>{d.total-d.done}</td>
+              <td><div style={{display:'flex',alignItems:'center',gap:8}}><div className="progress-bar" style={{width:100}}><div className="progress-fill" style={{width:`${Math.round((d.done/d.total)*100)}%`,background:'var(--blue)'}}/></div><span style={{fontSize:12}}>{Math.round((d.done/d.total)*100)}%</span></div></td>
+            </tr>)}
+          </tbody>
+        </table>
+      </div>
+    </div>}
+    {rtype==='fy'&&<div className="card">
+      <div className="card-header"><div><div className="card-title">Financial Year Report — FY 2024-25</div></div><button className="btn btn-secondary btn-sm">⬇ Export</button></div>
+      <div className="grid-4" style={{marginBottom:20}}>
+        {[['Total Tasks',tasks.length,'var(--blue)'],['Completed',tasks.filter(t=>t.status==='Completed').length,'var(--green)'],['Overdue',tasks.filter(t=>t.status==='Overdue').length,'var(--red)'],['Pending',tasks.filter(t=>t.status==='Pending').length,'var(--amber)']].map(([l,v,c])=><div key={l} style={{background:'var(--bg3)',borderRadius:'var(--radius)',padding:'16px',textAlign:'center'}}>
+          <div style={{fontSize:28,fontWeight:800,color:c}}>{v}</div>
+          <div style={{fontSize:12,color:'var(--text3)',marginTop:4}}>{l}</div>
+        </div>)}
+      </div>
+      <BarChart data={employees.map(e=>({label:e.name.split(' ')[0],val:tasks.filter(t=>t.assignedTo.includes(e.id)&&t.status==='Completed').length,color:e.color}))}/>
+    </div>}
+    {rtype==='monthly'&&<div className="card">
+      <div className="card-header"><div className="card-title">Monthly Task Summary</div><button className="btn btn-secondary btn-sm">⬇ Export</button></div>
+      <div style={{display:'flex',alignItems:'flex-end',gap:8,height:160,padding:'0 8px'}}>
+        {['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'].map((m,i)=>{
+          const h=Math.floor(Math.random()*120)+20;
+          return <div key={m} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:4}}>
+            <div style={{width:'100%',background:'var(--blue)',borderRadius:'4px 4px 0 0',height:h,transition:'height 0.5s'}}/>
+            <span style={{fontSize:10,color:'var(--text3)'}}>{m}</span>
+          </div>
+        })}
+      </div>
+    </div>}
+  </div>
+}
+
+function AnnouncementsPage({announcements,setAnnouncements,currentUser}){
+  const isManager=currentUser.role==='manager';
+  const [showCreate,setShowCreate]=useState(false);
+  const [form,setForm]=useState({title:'',body:'',priority:'Medium'});
+  function create(){
+    if(!form.title||!form.body)return;
+    setAnnouncements(p=>[{id:'a'+Date.now(),date:new Date().toISOString().slice(0,10),by:currentUser.id,...form},...p]);
+    setForm({title:'',body:'',priority:'Medium'});setShowCreate(false);
+  }
+  return <div>
+    {isManager&&<button className="btn btn-primary" style={{marginBottom:16}} onClick={()=>setShowCreate(true)}>+ New Announcement</button>}
+    {announcements.map(a=><div key={a.id} className="card" style={{marginBottom:12}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8}}>
+        <div style={{fontSize:16,fontWeight:700}}>{a.title}</div>
+        <div style={{display:'flex',gap:8,alignItems:'center'}}>
+          <span className={`badge badge-${a.priority==='High'?'overdue':a.priority==='Medium'?'pending':'done'}`}>{a.priority}</span>
+          <span style={{fontSize:11,color:'var(--text3)'}}>{fmtDate(a.date)}</span>
+        </div>
+      </div>
+      <p style={{fontSize:13,color:'var(--text2)',lineHeight:1.6}}>{a.body}</p>
+      <div style={{marginTop:8,display:'flex',alignItems:'center',gap:6}}>
+        <Avatar user={a.by} size={20}/>
+        <span style={{fontSize:11,color:'var(--text3)'}}>Posted by {getUser(a.by)?.name}</span>
+      </div>
+    </div>)}
+    {showCreate&&<Modal open title="New Announcement" onClose={()=>setShowCreate(false)}>
+      <div className="form-group"><label className="form-label">Title</label><input className="input" value={form.title} onChange={e=>setForm(p=>({...p,title:e.target.value}))}/></div>
+      <div className="form-group"><label className="form-label">Message</label><textarea className="input" rows={4} value={form.body} onChange={e=>setForm(p=>({...p,body:e.target.value}))} style={{resize:'vertical'}}/></div>
+      <div className="form-group"><label className="form-label">Priority</label><select className="select input" value={form.priority} onChange={e=>setForm(p=>({...p,priority:e.target.value}))}>{['High','Medium','Low'].map(p=><option key={p}>{p}</option>)}</select></div>
+      <div style={{display:'flex',gap:8,justifyContent:'flex-end'}}>
+        <button className="btn btn-secondary" onClick={()=>setShowCreate(false)}>Cancel</button>
+        <button className="btn btn-primary" onClick={create}>Post</button>
+      </div>
+    </Modal>}
+  </div>
+}
+
+function ActivityLogPage({logs}){
+  return <div className="card" style={{padding:0}}>
+    <div className="table-wrap">
+      <table>
+        <thead><tr><th>Time</th><th>User</th><th>Action</th><th>Type</th></tr></thead>
+        <tbody>
+          {logs.map((l,i)=><tr key={i}>
+            <td style={{fontSize:12,color:'var(--text3)',whiteSpace:'nowrap'}}>{l.time}</td>
+            <td><div style={{display:'flex',alignItems:'center',gap:8}}><Avatar user={l.user} size={24}/><span style={{fontSize:13}}>{getUser(l.user)?.name}</span></div></td>
+            <td style={{fontSize:13}}>{l.action}</td>
+            <td><span className={`badge badge-${l.type==='task'?'done':l.type==='assign'?'progress':l.type==='comment'?'pending':'approval'}`}>{l.type}</span></td>
+          </tr>)}
+        </tbody>
+      </table>
+    </div>
+  </div>
+}
+
+function App(){
+  const [currentUser,setCurrentUser]=useState(null);
+  const [tasks,setTasks]=useState(INIT_TASKS);
+  const [logs,setLogs]=useState(INIT_LOGS);
+  const [announcements,setAnnouncements]=useState(INIT_ANNOUNCEMENTS);
+  const [page,setPage]=useState('dashboard');
+  const [notifOpen,setNotifOpen]=useState(false);
+  const [sideCollapsed,setSideCollapsed]=useState(false);
+
+  if(!currentUser)return <LoginScreen onLogin={u=>{setCurrentUser(u);setPage('dashboard')}}/>;
+
+  const isManager=currentUser.role==='manager';
+  const myTasks=isManager?tasks:tasks.filter(t=>t.assignedTo.includes(currentUser.id));
+  con
