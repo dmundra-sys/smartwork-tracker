@@ -46,6 +46,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .btn{padding:8px 16px;border-radius:var(--radius);border:none;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.15s;font-family:inherit}
 .btn-primary{background:var(--blue);color:white}.btn-primary:hover{background:var(--blue2)}
 .btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border2)}.btn-secondary:hover{background:var(--bg4)}
+.btn-danger{background:var(--red);color:white}.btn-danger:hover{background:var(--red2)}
 .btn-sm{padding:5px 12px;font-size:12px}
 .btn-icon{width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:var(--radius);background:var(--bg3);border:1px solid var(--border);cursor:pointer;color:var(--text2);transition:all 0.15s;font-size:16px}
 .btn-icon:hover{background:var(--bg4);color:var(--text)}
@@ -59,7 +60,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .metric-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;position:relative;overflow:hidden}
 .metric-label{font-size:12px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
 .metric-value{font-size:28px;font-weight:700;margin:4px 0 2px;line-height:1}
-.metric-change{font-size:12px;color:var(--text3)}
 .metric-icon{position:absolute;right:16px;top:16px;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
 .badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
 .badge-pending{background:rgba(245,158,26,0.15);color:var(--amber)}
@@ -68,6 +68,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .badge-overdue{background:rgba(240,80,80,0.15);color:var(--red)}
 .badge-cancelled{background:rgba(92,98,114,0.15);color:var(--text3)}
 .badge-approval{background:rgba(167,139,250,0.15);color:var(--purple)}
+.badge-admin{background:rgba(255,107,53,0.15);color:#ff6b35}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse}
 th{font-size:11px;color:var(--text3);padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
@@ -77,9 +78,6 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 .progress-bar{height:6px;background:var(--bg4);border-radius:3px;overflow:hidden}
 .progress-fill{height:100%;border-radius:3px;transition:width 0.3s}
 .avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
-.avatar-group{display:flex}
-.avatar-group .avatar{margin-left:-8px;border:2px solid var(--bg2)}
-.avatar-group .avatar:first-child{margin-left:0}
 .tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;background:var(--bg4);color:var(--text2);margin-right:4px}
 .input{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:9px 12px;font-size:13px;color:var(--text);font-family:inherit;width:100%;outline:none;transition:border 0.15s}
 .input:focus{border-color:var(--blue)}
@@ -107,13 +105,18 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 .kanban-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.15s}
 .kanban-card:hover{border-color:var(--border2);transform:translateY(-1px)}
 .login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:20px}
-.login-card{width:100%;max-width:420px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius3);padding:36px}
-.login-brand{text-align:center;margin-bottom:32px}
+.login-card{width:100%;max-width:440px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius3);padding:36px}
+.login-brand{text-align:center;margin-bottom:28px}
 .login-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px}
-.user-btn{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:12px;cursor:pointer;transition:all 0.15s;text-align:center}
+.user-btn{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:10px;cursor:pointer;transition:all 0.15s;text-align:center}
 .user-btn:hover{border-color:var(--blue);background:rgba(79,142,247,0.05)}
 .user-btn.selected{border-color:var(--blue);background:rgba(79,142,247,0.1)}
-.chart-bar-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--text2)}
+.perf-bar{height:8px;border-radius:4px;background:var(--bg4);overflow:hidden;margin-top:4px}
+.perf-fill{height:100%;border-radius:4px}
+.employee-perf-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.employee-perf-row:last-child{border-bottom:none}
+.rank-badge{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
 .activity-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
 .activity-item:last-child{border-bottom:none}
 .activity-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0}
@@ -123,12 +126,9 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 .notif-panel.open{transform:translateX(0)}
 .notif-item{padding:12px;border-radius:var(--radius);background:var(--bg3);margin-bottom:8px;cursor:pointer}
 .notif-item.unread{border-left:3px solid var(--blue)}
-.chip{display:inline-flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-size:12px;color:var(--text2)}
-.perf-bar{height:8px;border-radius:4px;background:var(--bg4);overflow:hidden;margin-top:4px}
-.perf-fill{height:100%;border-radius:4px}
-.employee-perf-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
-.employee-perf-row:last-child{border-bottom:none}
-.rank-badge{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.profile-avatar-big{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;margin:0 auto 12px;cursor:pointer;border:3px solid var(--border)}
+.alert-success{background:rgba(62,207,106,0.1);border:1px solid rgba(62,207,106,0.3);color:var(--green);padding:10px 14px;border-radius:var(--radius);font-size:13px;margin-bottom:12px}
+.alert-error{background:rgba(240,80,80,0.1);border:1px solid rgba(240,80,80,0.3);color:var(--red);padding:10px 14px;border-radius:var(--radius);font-size:13px;margin-bottom:12px}
 </style>
 </head>
 <body>
@@ -137,29 +137,32 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel" data-presets="react">
+const {useState,useEffect,useRef}=React;
 
-const {useState,useEffect}=React;
+// ─── INITIAL DATA ───────────────────────────────────────────────
+const COLORS=['#4f8ef7','#a78bfa','#3ecf6a','#f59e1a','#2dd4bf','#f05050','#ff6b35','#ec4899','#06b6d4','#84cc16'];
 
-const USERS=[
-  {id:'mgr',name:'Rajesh Sharma',role:'manager',email:'rajesh@company.com',password:'Boss@123',dept:'Management',designation:'General Manager',mobile:'9876543210',avatar:'RS',color:'#4f8ef7',joining:'2018-04-01'},
-  {id:'e1',name:'Priya Patel',role:'employee',email:'priya@company.com',password:'Emp@1234',dept:'Accounts',designation:'Senior Accountant',mobile:'9876543211',avatar:'PP',color:'#a78bfa',joining:'2019-06-15'},
-  {id:'e2',name:'Amit Kumar',role:'employee',email:'amit@company.com',password:'Emp@1234',dept:'Finance',designation:'Finance Analyst',mobile:'9876543212',avatar:'AK',color:'#3ecf6a',joining:'2020-01-10'},
-  {id:'e3',name:'Sneha Desai',role:'employee',email:'sneha@company.com',password:'Emp@1234',dept:'Compliance',designation:'Compliance Officer',mobile:'9876543213',avatar:'SD',color:'#f59e1a',joining:'2019-09-20'},
-  {id:'e4',name:'Vikram Singh',role:'employee',email:'vikram@company.com',password:'Emp@1234',dept:'Investment',designation:'Investment Manager',mobile:'9876543214',avatar:'VS',color:'#2dd4bf',joining:'2021-03-05'},
-  {id:'e5',name:'Neha Joshi',role:'employee',email:'neha@company.com',password:'Emp@1234',dept:'Administration',designation:'Admin Executive',mobile:'9876543215',avatar:'NJ',color:'#f05050',joining:'2020-07-22'},
-  {id:'e6',name:'Rahul Mehta',role:'employee',email:'rahul@company.com',password:'Emp@1234',dept:'Finance',designation:'Tax Consultant',mobile:'9876543216',avatar:'RM',color:'#ff6b35',joining:'2021-11-01'},
-  {id:'e7',name:'Anjali Verma',role:'employee',email:'anjali@company.com',password:'Emp@1234',dept:'Accounts',designation:'Junior Accountant',mobile:'9876543217',avatar:'AV',color:'#ec4899',joining:'2022-02-14'},
+const INIT_USERS=[
+  {id:'admin',name:'System Admin',role:'admin',email:'admin@company.com',password:'Admin@123',dept:'Administration',designation:'System Administrator',mobile:'9800000000',whatsapp:'9800000000',avatar:'SA',color:'#ff6b35',joining:'2018-01-01',status:'Active',reporting:''},
+  {id:'mgr',name:'Rajesh Sharma',role:'manager',email:'rajesh@company.com',password:'Boss@123',dept:'Management',designation:'General Manager',mobile:'9876543210',whatsapp:'9876543210',avatar:'RS',color:'#4f8ef7',joining:'2018-04-01',status:'Active',reporting:'admin'},
+  {id:'e1',name:'Priya Patel',role:'employee',email:'priya@company.com',password:'Emp@1234',dept:'Accounts',designation:'Senior Accountant',mobile:'9876543211',whatsapp:'9876543211',avatar:'PP',color:'#a78bfa',joining:'2019-06-15',status:'Active',reporting:'mgr'},
+  {id:'e2',name:'Amit Kumar',role:'employee',email:'amit@company.com',password:'Emp@1234',dept:'Finance',designation:'Finance Analyst',mobile:'9876543212',whatsapp:'9876543212',avatar:'AK',color:'#3ecf6a',joining:'2020-01-10',status:'Active',reporting:'mgr'},
+  {id:'e3',name:'Sneha Desai',role:'employee',email:'sneha@company.com',password:'Emp@1234',dept:'Compliance',designation:'Compliance Officer',mobile:'9876543213',whatsapp:'9876543213',avatar:'SD',color:'#f59e1a',joining:'2019-09-20',status:'Active',reporting:'mgr'},
+  {id:'e4',name:'Vikram Singh',role:'employee',email:'vikram@company.com',password:'Emp@1234',dept:'Investment',designation:'Investment Manager',mobile:'9876543214',whatsapp:'9876543214',avatar:'VS',color:'#2dd4bf',joining:'2021-03-05',status:'Active',reporting:'mgr'},
+  {id:'e5',name:'Neha Joshi',role:'employee',email:'neha@company.com',password:'Emp@1234',dept:'Administration',designation:'Admin Executive',mobile:'9876543215',whatsapp:'9876543215',avatar:'NJ',color:'#f05050',joining:'2020-07-22',status:'Active',reporting:'mgr'},
+  {id:'e6',name:'Rahul Mehta',role:'employee',email:'rahul@company.com',password:'Emp@1234',dept:'Finance',designation:'Tax Consultant',mobile:'9876543216',whatsapp:'9876543216',avatar:'RM',color:'#ff6b35',joining:'2021-11-01',status:'Active',reporting:'mgr'},
+  {id:'e7',name:'Anjali Verma',role:'employee',email:'anjali@company.com',password:'Emp@1234',dept:'Accounts',designation:'Junior Accountant',mobile:'9876543217',whatsapp:'9876543217',avatar:'AV',color:'#ec4899',joining:'2022-02-14',status:'Active',reporting:'mgr'},
 ];
 
 const INIT_TASKS=[
-  {id:'T001',title:'Prepare Q1 Financial Report',desc:'Compile all Q1 financial statements and prepare detailed report for board review.',category:'Finance',dept:'Finance',priority:'Critical',assignedBy:'mgr',assignedTo:['e1','e2'],assignedDate:'2024-03-01',startDate:'2024-03-01',dueDate:'2024-03-31',expectedHours:20,progress:85,status:'In Progress',comments:[{user:'e1',text:'Draft ready, pending final review',time:'2024-03-20 10:30'}],attachments:[],reviewNotes:'',actualHours:18,completedDate:null,fy:'2024-25'},
-  {id:'T002',title:'GST Filing March 2024',desc:'Complete GST return filing for March 2024 including GSTR-1 and GSTR-3B.',category:'Compliance',dept:'Compliance',priority:'High',assignedBy:'mgr',assignedTo:['e3'],assignedDate:'2024-03-15',startDate:'2024-03-15',dueDate:'2024-04-10',expectedHours:8,progress:100,status:'Waiting for Approval',comments:[{user:'e3',text:'Filed successfully, awaiting confirmation',time:'2024-04-08 15:00'}],attachments:['gst_march.pdf'],reviewNotes:'',actualHours:7,completedDate:'2024-04-08',fy:'2024-25'},
-  {id:'T003',title:'Portfolio Review Q1',desc:'Review investment portfolio performance and prepare summary for management.',category:'Investment',dept:'Investment',priority:'High',assignedBy:'mgr',assignedTo:['e4'],assignedDate:'2024-03-05',startDate:'2024-03-10',dueDate:'2024-03-28',expectedHours:16,progress:60,status:'Overdue',comments:[],attachments:[],reviewNotes:'',actualHours:10,completedDate:null,fy:'2024-25'},
-  {id:'T004',title:'Office Renovation Coordination',desc:'Coordinate with vendors for office renovation. Get quotes and finalize schedule.',category:'Administration',dept:'Administration',priority:'Medium',assignedBy:'mgr',assignedTo:['e5'],assignedDate:'2024-03-10',startDate:'2024-03-12',dueDate:'2024-04-15',expectedHours:12,progress:30,status:'In Progress',comments:[{user:'e5',text:'Got 3 vendor quotes, comparing',time:'2024-03-22 09:00'}],attachments:[],reviewNotes:'',actualHours:5,completedDate:null,fy:'2024-25'},
-  {id:'T005',title:'Income Tax Assessment FY23',desc:'Prepare documents and respond to income tax assessment notices for FY 2022-23.',category:'Tax',dept:'Finance',priority:'Critical',assignedBy:'mgr',assignedTo:['e6','e1'],assignedDate:'2024-02-20',startDate:'2024-02-22',dueDate:'2024-03-20',expectedHours:24,progress:100,status:'Completed',comments:[{user:'e6',text:'Response submitted to department',time:'2024-03-18 14:00'}],attachments:[],reviewNotes:'Good work, timely completion',actualHours:22,completedDate:'2024-03-18',fy:'2024-25'},
-  {id:'T006',title:'Board Meeting Minutes',desc:'Prepare and circulate minutes of the last board meeting with action items.',category:'Administration',dept:'Administration',priority:'Medium',assignedBy:'mgr',assignedTo:['e7'],assignedDate:'2024-04-01',startDate:'2024-04-01',dueDate:'2024-04-05',expectedHours:4,progress:100,status:'Completed',comments:[],attachments:[],reviewNotes:'Approved',actualHours:3.5,completedDate:'2024-04-04',fy:'2024-25'},
-  {id:'T007',title:'Employee PF Compliance',desc:'Ensure all PF contributions are filed and compliance reports submitted for Q4.',category:'HR Compliance',dept:'Accounts',priority:'High',assignedBy:'mgr',assignedTo:['e1','e7'],assignedDate:'2024-04-05',startDate:'2024-04-06',dueDate:'2024-04-25',expectedHours:10,progress:20,status:'Pending',comments:[],attachments:[],reviewNotes:'',actualHours:2,completedDate:null,fy:'2024-25'},
-  {id:'T008',title:'MIS Report Preparation',desc:'Monthly MIS report for March 2024 covering all departments.',category:'Management',dept:'Finance',priority:'High',assignedBy:'mgr',assignedTo:['e2'],assignedDate:'2024-04-02',startDate:'2024-04-03',dueDate:'2024-04-08',expectedHours:8,progress:0,status:'Pending',comments:[],attachments:[],reviewNotes:'',actualHours:0,completedDate:null,fy:'2024-25'},
+  {id:'T001',title:'Prepare Q1 Financial Report',desc:'Compile all Q1 financial statements and prepare detailed report for board review.',category:'Finance',dept:'Finance',priority:'Critical',assignedBy:'mgr',assignedTo:['e1','e2'],assignedDate:'2024-03-01',startDate:'2024-03-01',dueDate:'2024-03-31',expectedHours:20,progress:85,status:'In Progress',comments:[{user:'e1',text:'Draft ready, pending final review',time:'2024-03-20 10:30'}],reviewNotes:'',actualHours:18,completedDate:null,fy:'2024-25'},
+  {id:'T002',title:'GST Filing March 2024',desc:'Complete GST return filing for March 2024 including GSTR-1 and GSTR-3B.',category:'Compliance',dept:'Compliance',priority:'High',assignedBy:'mgr',assignedTo:['e3'],assignedDate:'2024-03-15',startDate:'2024-03-15',dueDate:'2024-04-10',expectedHours:8,progress:100,status:'Waiting for Approval',comments:[{user:'e3',text:'Filed successfully, awaiting confirmation',time:'2024-04-08 15:00'}],reviewNotes:'',actualHours:7,completedDate:'2024-04-08',fy:'2024-25'},
+  {id:'T003',title:'Portfolio Review Q1',desc:'Review investment portfolio performance and prepare summary for management.',category:'Investment',dept:'Investment',priority:'High',assignedBy:'mgr',assignedTo:['e4'],assignedDate:'2024-03-05',startDate:'2024-03-10',dueDate:'2024-03-28',expectedHours:16,progress:60,status:'Overdue',comments:[],reviewNotes:'',actualHours:10,completedDate:null,fy:'2024-25'},
+  {id:'T004',title:'Office Renovation Coordination',desc:'Coordinate with vendors for office renovation.',category:'Administration',dept:'Administration',priority:'Medium',assignedBy:'mgr',assignedTo:['e5'],assignedDate:'2024-03-10',startDate:'2024-03-12',dueDate:'2024-04-15',expectedHours:12,progress:30,status:'In Progress',comments:[],reviewNotes:'',actualHours:5,completedDate:null,fy:'2024-25'},
+  {id:'T005',title:'Income Tax Assessment FY23',desc:'Prepare documents and respond to income tax assessment notices.',category:'Tax',dept:'Finance',priority:'Critical',assignedBy:'mgr',assignedTo:['e6','e1'],assignedDate:'2024-02-20',startDate:'2024-02-22',dueDate:'2024-03-20',expectedHours:24,progress:100,status:'Completed',comments:[{user:'e6',text:'Response submitted to department',time:'2024-03-18 14:00'}],reviewNotes:'Good work, timely completion',actualHours:22,completedDate:'2024-03-18',fy:'2024-25'},
+  {id:'T006',title:'Board Meeting Minutes',desc:'Prepare and circulate minutes of the last board meeting.',category:'Administration',dept:'Administration',priority:'Medium',assignedBy:'mgr',assignedTo:['e7'],assignedDate:'2024-04-01',startDate:'2024-04-01',dueDate:'2024-04-05',expectedHours:4,progress:100,status:'Completed',comments:[],reviewNotes:'Approved',actualHours:3.5,completedDate:'2024-04-04',fy:'2024-25'},
+  {id:'T007',title:'Employee PF Compliance',desc:'Ensure all PF contributions are filed and compliance reports submitted.',category:'HR Compliance',dept:'Accounts',priority:'High',assignedBy:'mgr',assignedTo:['e1','e7'],assignedDate:'2024-04-05',startDate:'2024-04-06',dueDate:'2024-04-25',expectedHours:10,progress:20,status:'Pending',comments:[],reviewNotes:'',actualHours:2,completedDate:null,fy:'2024-25'},
+  {id:'T008',title:'MIS Report Preparation',desc:'Monthly MIS report for March 2024 covering all departments.',category:'Management',dept:'Finance',priority:'High',assignedBy:'mgr',assignedTo:['e2'],assignedDate:'2024-04-02',startDate:'2024-04-03',dueDate:'2024-04-08',expectedHours:8,progress:0,status:'Pending',comments:[],reviewNotes:'',actualHours:0,completedDate:null,fy:'2024-25'},
 ];
 
 const DEPTS=['Finance','Accounts','Compliance','Investment','Administration','Management','Tax','HR Compliance'];
@@ -167,36 +170,46 @@ const CATEGORIES=['Finance','Compliance','Tax','Investment','Administration','Ma
 const PRIORITIES=['Critical','High','Medium','Low'];
 const STATUSES=['Pending','In Progress','Waiting for Approval','Completed','Rejected','Overdue','Cancelled'];
 const INIT_ANNOUNCEMENTS=[
-  {id:'a1',title:'Q1 Review Meeting',body:'All team members are required to attend the Q1 review meeting on April 15th at 3 PM in Conference Room A.',date:'2024-04-03',priority:'High',by:'mgr'},
+  {id:'a1',title:'Q1 Review Meeting',body:'All team members attend Q1 review meeting on April 15th at 3 PM in Conference Room A.',date:'2024-04-03',priority:'High',by:'mgr'},
   {id:'a2',title:'New Leave Policy',body:'Updated leave policy effective from April 1st. Please review the document shared on the portal.',date:'2024-04-01',priority:'Medium',by:'mgr'},
 ];
 const INIT_LOGS=[
   {time:'2024-04-08 15:30',user:'e3',action:'Marked task T002 as completed',type:'task'},
   {time:'2024-04-07 11:00',user:'mgr',action:'Assigned new task T007 to Priya & Anjali',type:'assign'},
   {time:'2024-04-06 09:15',user:'e5',action:'Added comment on task T004',type:'comment'},
-  {time:'2024-04-05 16:45',user:'e4',action:'Updated progress on T003 to 60%',type:'update'},
   {time:'2024-04-04 14:00',user:'e7',action:'Completed task T006',type:'task'},
-  {time:'2024-04-03 10:30',user:'mgr',action:'Created announcement: Q1 Review Meeting',type:'announce'},
 ];
 
-function getUser(id){return USERS.find(u=>u.id===id)}
+// ─── HELPERS ───────────────────────────────────────────────────
 function fmtDate(d){if(!d)return '-';try{return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return d}}
 function daysDiff(d){if(!d)return 0;return Math.ceil((new Date(d)-new Date())/86400000)}
+function initials(name){return name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
 
 function Avatar({user,size=30}){
-  const u=typeof user==='string'?getUser(user):user;
+  if(!user)return null;
+  const u=typeof user==='string'?null:user;
+  const color=u?u.color:'#4f8ef7';
+  const av=u?u.avatar:'??';
+  return <div style={{width:size,height:size,borderRadius:'50%',background:color+'22',color:color,fontSize:size*0.36,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,flexShrink:0}}>{av}</div>
+}
+function UserAvatar({userId,users,size=30}){
+  const u=users.find(x=>x.id===userId);
   if(!u)return null;
-  return <div style={{width:size,height:size,borderRadius:'50%',background:u.color+'22',color:u.color,fontSize:size*0.36,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,flexShrink:0}}>{u.avatar}</div>
+  return <Avatar user={u} size={size}/>
 }
 
 function StatusBadge({status}){
   const map={Pending:'badge-pending','In Progress':'badge-progress','Waiting for Approval':'badge-approval',Completed:'badge-done',Overdue:'badge-overdue',Rejected:'badge-cancelled',Cancelled:'badge-cancelled'};
   return <span className={`badge ${map[status]||'badge-cancelled'}`}>{status}</span>
 }
-
 function PriorityBadge({p}){
   const map={Critical:'#ff6b35',High:'#f05050',Medium:'#f59e1a',Low:'#3ecf6a'};
   return <span style={{color:map[p],fontSize:12,fontWeight:600}}>{p}</span>
+}
+function RoleBadge({role}){
+  const map={admin:{cls:'badge-admin',label:'👑 Admin'},manager:{cls:'badge-progress',label:'👔 Manager'},employee:{cls:'badge-done',label:'👤 Employee'}};
+  const r=map[role]||map.employee;
+  return <span className={`badge ${r.cls}`}>{r.label}</span>
 }
 
 function Modal({open,onClose,title,children,width=580}){
@@ -205,7 +218,7 @@ function Modal({open,onClose,title,children,width=580}){
     <div className="modal" style={{maxWidth:width}}>
       <div className="modal-header">
         <span className="modal-title">{title}</span>
-        <button className="btn-icon" onClick={onClose} style={{width:28,height:28}}>✕</button>
+        <button className="btn-icon" onClick={onClose} style={{width:28,height:28,fontSize:14}}>✕</button>
       </div>
       {children}
     </div>
@@ -220,33 +233,33 @@ function DonutChart({values,colors,size=100,thickness=16}){
   const segs=values.map((v,i)=>{
     const dash=(v/total)*circ;
     const seg=<circle key={i} cx={size/2} cy={size/2} r={r} fill="none" stroke={colors[i]} strokeWidth={thickness} strokeDasharray={`${dash} ${circ-dash}`} strokeDashoffset={-offset}/>
-    offset+=dash;
-    return seg;
+    offset+=dash;return seg;
   });
   return <svg width={size} height={size} style={{transform:'rotate(-90deg)'}}>{segs}</svg>
 }
-
 function BarChart({data}){
   const max=Math.max(...data.map(d=>d.val),1);
   return <div>{data.map((d,i)=><div key={i} style={{display:'flex',alignItems:'center',gap:10,marginBottom:10}}>
     <span style={{fontSize:12,color:'var(--text2)',minWidth:80,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{d.label}</span>
     <div style={{flex:1,height:20,background:'var(--bg4)',borderRadius:4,overflow:'hidden'}}>
-      <div style={{width:`${(d.val/max)*100}%`,height:'100%',background:d.color||'var(--blue)',borderRadius:4,transition:'width 0.5s'}}/>
+      <div style={{width:`${(d.val/max)*100}%`,height:'100%',background:d.color||'var(--blue)',borderRadius:4}}/>
     </div>
     <span style={{fontSize:12,color:'var(--text3)',minWidth:20}}>{d.val}</span>
   </div>)}</div>
 }
 
-function LoginScreen({onLogin}){
-  const [selected,setSelected]=useState(null);
+// ─── LOGIN ──────────────────────────────────────────────────────
+function LoginScreen({onLogin,users}){
+  const [sel,setSel]=useState(null);
   const [pw,setPw]=useState('');
   const [err,setErr]=useState('');
   const [step,setStep]=useState(1);
+  const activeUsers=users.filter(u=>u.status!=='Inactive');
   function tryLogin(){
-    if(!selected){setErr('Select a user');return}
-    const u=USERS.find(x=>x.id===selected);
+    const u=activeUsers.find(x=>x.id===sel);
+    if(!u)return;
     if(pw===u.password){onLogin(u);setErr('')}
-    else setErr('Incorrect password')
+    else setErr('Incorrect password. Please try again.')
   }
   return <div className="login-screen">
     <div className="login-card">
@@ -256,140 +269,259 @@ function LoginScreen({onLogin}){
         <div style={{fontSize:13,color:'var(--text3)',marginTop:4}}>Work Allocation & Performance System</div>
       </div>
       {step===1?<>
-        <div style={{fontSize:13,color:'var(--text2)',marginBottom:12}}>Select your account:</div>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:12}}>
-          {USERS.map(u=><div key={u.id} className={`user-btn${selected===u.id?' selected':''}`} onClick={()=>{setSelected(u.id);setErr('')}}>
+        <div style={{fontSize:13,color:'var(--text2)',marginBottom:12,fontWeight:500}}>Select your account to continue:</div>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:16,maxHeight:320,overflowY:'auto'}}>
+          {activeUsers.map(u=><div key={u.id} className={`user-btn${sel===u.id?' selected':''}`} onClick={()=>{setSel(u.id);setErr('')}}>
             <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:6}}>
-              <div style={{width:36,height:36,borderRadius:'50%',background:u.color+'22',color:u.color,fontSize:13,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{u.avatar}</div>
+              <div style={{width:38,height:38,borderRadius:'50%',background:u.color+'22',color:u.color,fontSize:14,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{u.avatar}</div>
               <div style={{fontSize:12,fontWeight:600}}>{u.name.split(' ')[0]}</div>
-              <div style={{fontSize:10,color:'var(--text3)'}}>{u.role==='manager'?'👔 Manager':'👤 Emp'}</div>
+              <div style={{fontSize:10,color:'var(--text3)'}}>{u.role==='admin'?'👑 Admin':u.role==='manager'?'👔 Mgr':'👤 Emp'}</div>
             </div>
           </div>)}
         </div>
-        {err&&<div style={{color:'var(--red)',fontSize:12,marginBottom:8}}>{err}</div>}
-        <button className="btn btn-primary" style={{width:'100%',padding:'12px'}} onClick={()=>{if(selected)setStep(2);else setErr('Select a user')}}>Continue →</button>
-        <div style={{marginTop:12,background:'var(--bg3)',borderRadius:'var(--radius)',padding:'10px 12px',fontSize:11,color:'var(--text2)'}}>
-          Manager: <code style={{color:'var(--blue)'}}>Boss@123</code> &nbsp;|&nbsp; Employees: <code style={{color:'var(--green)'}}>Emp@1234</code>
+        {err&&<div className="alert-error">{err}</div>}
+        <button className="btn btn-primary" style={{width:'100%',padding:'11px'}} onClick={()=>{if(sel)setStep(2);else setErr('Please select a user')}}>Continue →</button>
+        <div style={{marginTop:12,background:'var(--bg3)',borderRadius:'var(--radius)',padding:'10px 14px',fontSize:11}}>
+          <div style={{color:'var(--text3)',marginBottom:4,fontWeight:600}}>Demo Credentials:</div>
+          <div style={{color:'var(--text2)'}}>Admin: <code style={{color:'#ff6b35'}}>Admin@123</code> &nbsp;|&nbsp; Manager: <code style={{color:'var(--blue)'}}>Boss@123</code> &nbsp;|&nbsp; Employees: <code style={{color:'var(--green)'}}>Emp@1234</code></div>
         </div>
       </>:<>
         <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:20,padding:'12px',background:'var(--bg3)',borderRadius:'var(--radius)'}}>
-          <Avatar user={selected} size={36}/>
-          <div>
-            <div style={{fontSize:14,fontWeight:600}}>{getUser(selected)?.name}</div>
-            <div style={{fontSize:12,color:'var(--text3)'}}>{getUser(selected)?.designation}</div>
-          </div>
+          {(()=>{const u=activeUsers.find(x=>x.id===sel);return u?<><div style={{width:40,height:40,borderRadius:'50%',background:u.color+'22',color:u.color,fontSize:15,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{u.avatar}</div><div><div style={{fontSize:14,fontWeight:600}}>{u.name}</div><div style={{fontSize:12,color:'var(--text3)'}}>{u.designation}</div></div></>:null})()}
         </div>
         <div className="form-group">
           <label className="form-label">Password</label>
-          <input className="input" type="password" placeholder="Enter password" value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==='Enter'&&tryLogin()}/>
+          <input className="input" type="password" placeholder="Enter your password" value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==='Enter'&&tryLogin()} autoFocus/>
         </div>
-        {err&&<div style={{color:'var(--red)',fontSize:12,marginBottom:8}}>{err}</div>}
-        <button className="btn btn-primary" style={{width:'100%',padding:'12px'}} onClick={tryLogin}>Login →</button>
+        {err&&<div className="alert-error">{err}</div>}
+        <button className="btn btn-primary" style={{width:'100%',padding:'11px'}} onClick={tryLogin}>Login →</button>
         <button className="btn btn-secondary" style={{width:'100%',marginTop:8}} onClick={()=>{setStep(1);setPw('');setErr('')}}>← Back</button>
       </>}
     </div>
   </div>
 }
 
-function ManagerDashboard({tasks,logs}){
-  const employees=USERS.filter(u=>u.role==='employee');
-  const st={Pending:0,'In Progress':0,Completed:0,Overdue:0,'Waiting for Approval':0};
-  tasks.forEach(t=>{if(st[t.status]!==undefined)st[t.status]++});
-  const empPerf=employees.map(e=>{
-    const a=tasks.filter(t=>t.assignedTo.includes(e.id));
-    const d=a.filter(t=>t.status==='Completed');
-    const o=a.filter(t=>t.status==='Overdue');
-    return{...e,assigned:a.length,done:d.length,overdue:o.length,rate:a.length?Math.round((d.length/a.length)*100):0};
-  }).sort((a,b)=>b.rate-a.rate);
-  const deptData=DEPTS.slice(0,6).map((d,i)=>({label:d,val:tasks.filter(t=>t.dept===d).length,color:['#4f8ef7','#a78bfa','#3ecf6a','#f59e1a','#2dd4bf','#f05050'][i%6]}));
-  return <div>
-    <div className="grid-4" style={{marginBottom:20}}>
-      {[{label:'Total Tasks',val:tasks.length,icon:'📋',color:'var(--blue)',bg:'rgba(79,142,247,0.1)'},{label:'In Progress',val:st['In Progress'],icon:'⚡',color:'var(--amber)',bg:'rgba(245,158,26,0.1)'},{label:'Completed',val:st['Completed'],icon:'✅',color:'var(--green)',bg:'rgba(62,207,106,0.1)'},{label:'Overdue',val:st['Overdue'],icon:'🚨',color:'var(--red)',bg:'rgba(240,80,80,0.1)'}].map((m,i)=><div key={i} className="metric-card">
-        <div className="metric-icon" style={{background:m.bg,fontSize:18}}>{m.icon}</div>
-        <div className="metric-label">{m.label}</div>
-        <div className="metric-value" style={{color:m.color}}>{m.val}</div>
-      </div>)}
+// ─── PROFILE PAGE ──────────────────────────────────────────────
+function ProfilePage({currentUser,users,setUsers,setLogs,onUserUpdate}){
+  const [tab,setTab]=useState('profile');
+  const [form,setForm]=useState({name:currentUser.name,email:currentUser.email,mobile:currentUser.mobile,whatsapp:currentUser.whatsapp,designation:currentUser.designation,dept:currentUser.dept,avatar:currentUser.avatar,color:currentUser.color});
+  const [pwForm,setPwForm]=useState({current:'',newPw:'',confirm:''});
+  const [msg,setMsg]=useState('');
+  const [err,setErr]=useState('');
+
+  function saveProfile(){
+    if(!form.name.trim()){setErr('Name is required');return}
+    if(!form.email.trim()){setErr('Email is required');return}
+    const updated={...currentUser,...form,avatar:initials(form.name)};
+    setUsers(prev=>prev.map(u=>u.id===currentUser.id?updated:u));
+    onUserUpdate(updated);
+    setMsg('Profile updated successfully!');setErr('');
+    setLogs(p=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:currentUser.id,action:'Updated profile',type:'profile'},...p]);
+    setTimeout(()=>setMsg(''),3000);
+  }
+  function changePassword(){
+    if(pwForm.current!==currentUser.password){setErr('Current password is incorrect');return}
+    if(pwForm.newPw.length<6){setErr('New password must be at least 6 characters');return}
+    if(pwForm.newPw!==pwForm.confirm){setErr('New passwords do not match');return}
+    const updated={...currentUser,password:pwForm.newPw};
+    setUsers(prev=>prev.map(u=>u.id===currentUser.id?updated:u));
+    onUserUpdate(updated);
+    setPwForm({current:'',newPw:'',confirm:''});
+    setMsg('Password changed successfully!');setErr('');
+    setLogs(p=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:currentUser.id,action:'Changed password',type:'security'},...p]);
+    setTimeout(()=>setMsg(''),3000);
+  }
+
+  return <div style={{maxWidth:600}}>
+    <div className="tabs" style={{marginBottom:20}}>
+      {[['profile','👤 Edit Profile'],['password','🔒 Change Password']].map(([k,l])=><div key={k} className={`tab${tab===k?' active':''}`} onClick={()=>{setTab(k);setMsg('');setErr('')}}>{l}</div>)}
     </div>
-    <div className="grid-2" style={{marginBottom:20}}>
-      <div className="card">
-        <div className="card-header"><span className="card-title">Task Status Overview</span></div>
-        <div style={{display:'flex',gap:20,alignItems:'center'}}>
-          <DonutChart values={[st.Pending,st['In Progress'],st.Completed,st.Overdue,st['Waiting for Approval']]} colors={['#f59e1a','#4f8ef7','#3ecf6a','#f05050','#a78bfa']}/>
-          <div style={{flex:1}}>
-            {[['Pending',st.Pending,'#f59e1a'],['In Progress',st['In Progress'],'#4f8ef7'],['Completed',st.Completed,'#3ecf6a'],['Overdue',st.Overdue,'#f05050'],['For Approval',st['Waiting for Approval'],'#a78bfa']].map(([l,v,c])=><div key={l} style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
-              <div style={{width:8,height:8,borderRadius:2,background:c}}/>
-              <span style={{fontSize:12,color:'var(--text2)',flex:1}}>{l}</span>
-              <span style={{fontSize:13,fontWeight:600}}>{v}</span>
-            </div>)}
-          </div>
+    {msg&&<div className="alert-success">✅ {msg}</div>}
+    {err&&<div className="alert-error">❌ {err}</div>}
+
+    {tab==='profile'&&<div className="card">
+      <div style={{textAlign:'center',marginBottom:20}}>
+        <div className="profile-avatar-big" style={{background:form.color+'22',color:form.color,width:80,height:80,borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:28,fontWeight:700,margin:'0 auto 8px'}}>
+          {initials(form.name||'U')}
+        </div>
+        <div style={{fontSize:11,color:'var(--text3)',marginBottom:8}}>Avatar color:</div>
+        <div style={{display:'flex',gap:8,justifyContent:'center',flexWrap:'wrap'}}>
+          {COLORS.map(c=><div key={c} onClick={()=>setForm(f=>({...f,color:c}))} style={{width:24,height:24,borderRadius:'50%',background:c,cursor:'pointer',border:form.color===c?'3px solid white':'3px solid transparent',transition:'all 0.15s'}}/>)}
         </div>
       </div>
-      <div className="card">
-        <div className="card-header"><span className="card-title">Department Workload</span></div>
-        <BarChart data={deptData.filter(d=>d.val>0)}/>
-      </div>
-    </div>
-    <div className="card" style={{marginBottom:20}}>
-      <div className="card-header"><div><div className="card-title">Employee Performance Rankings</div><div className="card-sub">FY 2024-25</div></div></div>
-      {empPerf.map((e,i)=><div key={e.id} className="employee-perf-row">
-        <div className="rank-badge" style={{background:i===0?'#f59e1a22':i===1?'#b0b3c022':'var(--bg4)',color:i===0?'#f59e1a':i===1?'var(--text3)':'var(--text3)'}}>{i+1}</div>
-        <Avatar user={e} size={32}/>
-        <div style={{flex:1}}>
-          <div style={{fontSize:13,fontWeight:600}}>{e.name}</div>
-          <div style={{fontSize:11,color:'var(--text3)'}}>{e.dept}</div>
-          <div className="perf-bar" style={{marginTop:4,width:200}}><div className="perf-fill" style={{width:`${e.rate}%`,background:e.rate>=80?'var(--green)':e.rate>=50?'var(--amber)':'var(--red)'}}/></div>
+      <div className="grid-2">
+        <div className="form-group"><label className="form-label">Full Name *</label><input className="input" value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))}/></div>
+        <div className="form-group"><label className="form-label">Email *</label><input className="input" type="email" value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))}/></div>
+        <div className="form-group"><label className="form-label">Mobile</label><input className="input" value={form.mobile} onChange={e=>setForm(f=>({...f,mobile:e.target.value}))}/></div>
+        <div className="form-group"><label className="form-label">WhatsApp</label><input className="input" value={form.whatsapp} onChange={e=>setForm(f=>({...f,whatsapp:e.target.value}))}/></div>
+        <div className="form-group"><label className="form-label">Designation</label><input className="input" value={form.designation} onChange={e=>setForm(f=>({...f,designation:e.target.value}))}/></div>
+        <div className="form-group"><label className="form-label">Department</label>
+          <select className="select input" value={form.dept} onChange={e=>setForm(f=>({...f,dept:e.target.value}))}>
+            {DEPTS.map(d=><option key={d}>{d}</option>)}
+          </select>
         </div>
-        <div style={{textAlign:'right'}}>
-          <div style={{fontSize:18,fontWeight:700,color:e.rate>=80?'var(--green)':e.rate>=50?'var(--amber)':'var(--red)'}}>{e.rate}%</div>
-          <div style={{fontSize:11,color:'var(--text3)'}}>{e.done}/{e.assigned} tasks</div>
-        </div>
-      </div>)}
-    </div>
-    <div className="grid-2">
-      <div className="card">
-        <div className="card-header"><span className="card-title">Recent Activity</span></div>
-        {logs.slice(0,5).map((l,i)=><div key={i} className="activity-item">
-          <div className="activity-dot" style={{background:l.type==='task'?'var(--green)':l.type==='assign'?'var(--blue)':l.type==='comment'?'var(--amber)':'var(--purple)'}}/>
-          <div className="activity-content">
-            <div style={{fontSize:13}}>{l.action}</div>
-            <div className="activity-time">{getUser(l.user)?.name} · {l.time}</div>
-          </div>
-        </div>)}
       </div>
-      <div className="card">
-        <div className="card-header"><span className="card-title">Upcoming Deadlines</span></div>
-        {tasks.filter(t=>t.status!=='Completed'&&t.status!=='Cancelled').sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate)).slice(0,5).map(t=>{
-          const d=daysDiff(t.dueDate);
-          return <div key={t.id} className="stat-row">
-            <div><div style={{fontSize:13,fontWeight:500}}>{t.title}</div><div style={{fontSize:11,color:'var(--text3)'}}>{t.dept}</div></div>
-            <div style={{textAlign:'right'}}>
-              <div style={{fontSize:12,color:d<0?'var(--red)':d<=3?'var(--amber)':'var(--text3)'}}>{d<0?`${Math.abs(d)}d overdue`:d===0?'Today':`${d}d left`}</div>
-              <StatusBadge status={t.status}/>
-            </div>
-          </div>
-        })}
+      <div style={{display:'flex',justifyContent:'flex-end',marginTop:8}}>
+        <button className="btn btn-primary" onClick={saveProfile}>💾 Save Profile</button>
       </div>
-    </div>
+    </div>}
+
+    {tab==='password'&&<div className="card">
+      <div style={{marginBottom:16,padding:'12px',background:'rgba(79,142,247,0.05)',border:'1px solid rgba(79,142,247,0.2)',borderRadius:'var(--radius)',fontSize:13,color:'var(--text2)'}}>
+        🔐 Password must be at least 6 characters long.
+      </div>
+      <div className="form-group"><label className="form-label">Current Password</label><input className="input" type="password" value={pwForm.current} onChange={e=>setPwForm(f=>({...f,current:e.target.value}))}/></div>
+      <div className="form-group"><label className="form-label">New Password</label><input className="input" type="password" value={pwForm.newPw} onChange={e=>setPwForm(f=>({...f,newPw:e.target.value}))}/></div>
+      <div className="form-group"><label className="form-label">Confirm New Password</label><input className="input" type="password" value={pwForm.confirm} onChange={e=>setPwForm(f=>({...f,confirm:e.target.value}))}/></div>
+      <div style={{display:'flex',justifyContent:'flex-end'}}>
+        <button className="btn btn-primary" onClick={changePassword}>🔒 Change Password</button>
+      </div>
+    </div>}
   </div>
 }
 
-function TaskList({tasks,setTasks,currentUser,setLogs}){
+// ─── ADMIN USER MANAGEMENT ─────────────────────────────────────
+function AdminUsersPage({users,setUsers,setLogs}){
+  const [showAdd,setShowAdd]=useState(false);
+  const [editUser,setEditUser]=useState(null);
+  const [confirmDel,setConfirmDel]=useState(null);
+  const [msg,setMsg]=useState('');
+  const BLANK={name:'',email:'',password:'',role:'employee',dept:'Finance',designation:'',mobile:'',whatsapp:'',color:'#4f8ef7',status:'Active',reporting:'mgr'};
+  const [form,setForm]=useState(BLANK);
+  const f=(k,v)=>setForm(p=>({...p,[k]:v}));
+
+  function saveUser(){
+    if(!form.name||!form.email||!form.password){return}
+    if(editUser){
+      setUsers(prev=>prev.map(u=>u.id===editUser.id?{...u,...form,avatar:initials(form.name)}:u));
+      setMsg('User updated!');
+      setLogs(p=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:'admin',action:`Updated user: ${form.name}`,type:'admin'},...p]);
+      setEditUser(null);
+    } else {
+      const newId='u'+Date.now();
+      setUsers(prev=>[...prev,{...form,id:newId,avatar:initials(form.name),joining:new Date().toISOString().slice(0,10)}]);
+      setMsg('User added!');
+      setLogs(p=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:'admin',action:`Added new user: ${form.name}`,type:'admin'},...p]);
+      setShowAdd(false);
+    }
+    setForm(BLANK);setTimeout(()=>setMsg(''),3000);
+  }
+  function deleteUser(u){
+    setUsers(prev=>prev.filter(x=>x.id!==u.id));
+    setLogs(p=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:'admin',action:`Deleted user: ${u.name}`,type:'admin'},...p]);
+    setConfirmDel(null);setMsg('User deleted.');setTimeout(()=>setMsg(''),3000);
+  }
+  function startEdit(u){setEditUser(u);setForm({name:u.name,email:u.email,password:u.password,role:u.role,dept:u.dept,designation:u.designation,mobile:u.mobile,whatsapp:u.whatsapp||'',color:u.color,status:u.status,reporting:u.reporting||''});}
+
+  const UserForm=({title,onCancel})=><div className="card" style={{marginBottom:16}}>
+    <div className="card-header"><span className="card-title">{title}</span><button className="btn-icon" onClick={onCancel} style={{width:28,height:28,fontSize:14}}>✕</button></div>
+    <div className="grid-2">
+      <div className="form-group"><label className="form-label">Full Name *</label><input className="input" value={form.name} onChange={e=>f('name',e.target.value)} placeholder="Enter full name"/></div>
+      <div className="form-group"><label className="form-label">Email *</label><input className="input" type="email" value={form.email} onChange={e=>f('email',e.target.value)} placeholder="email@company.com"/></div>
+      <div className="form-group"><label className="form-label">Password *</label><input className="input" type="text" value={form.password} onChange={e=>f('password',e.target.value)} placeholder="Set password"/></div>
+      <div className="form-group"><label className="form-label">Role</label>
+        <select className="select input" value={form.role} onChange={e=>f('role',e.target.value)}>
+          <option value="employee">Employee</option><option value="manager">Manager</option><option value="admin">Admin</option>
+        </select>
+      </div>
+      <div className="form-group"><label className="form-label">Department</label>
+        <select className="select input" value={form.dept} onChange={e=>f('dept',e.target.value)}>{DEPTS.map(d=><option key={d}>{d}</option>)}</select>
+      </div>
+      <div className="form-group"><label className="form-label">Designation</label><input className="input" value={form.designation} onChange={e=>f('designation',e.target.value)}/></div>
+      <div className="form-group"><label className="form-label">Mobile</label><input className="input" value={form.mobile} onChange={e=>f('mobile',e.target.value)}/></div>
+      <div className="form-group"><label className="form-label">WhatsApp</label><input className="input" value={form.whatsapp} onChange={e=>f('whatsapp',e.target.value)}/></div>
+      <div className="form-group"><label className="form-label">Status</label>
+        <select className="select input" value={form.status} onChange={e=>f('status',e.target.value)}><option>Active</option><option>Inactive</option></select>
+      </div>
+      <div className="form-group"><label className="form-label">Avatar Color</label>
+        <div style={{display:'flex',gap:6,flexWrap:'wrap',marginTop:4}}>
+          {COLORS.map(c=><div key={c} onClick={()=>f('color',c)} style={{width:22,height:22,borderRadius:'50%',background:c,cursor:'pointer',border:form.color===c?'3px solid white':'3px solid transparent'}}/>)}
+        </div>
+      </div>
+    </div>
+    <div style={{display:'flex',gap:8,justifyContent:'flex-end',marginTop:8}}>
+      <button className="btn btn-secondary" onClick={onCancel}>Cancel</button>
+      <button className="btn btn-primary" onClick={saveUser}>💾 Save User</button>
+    </div>
+  </div>;
+
+  return <div>
+    {msg&&<div className="alert-success" style={{marginBottom:16}}>✅ {msg}</div>}
+    {!showAdd&&!editUser&&<button className="btn btn-primary" style={{marginBottom:16}} onClick={()=>{setShowAdd(true);setEditUser(null);setForm(BLANK)}}>+ Add New User</button>}
+    {showAdd&&!editUser&&<UserForm title="Add New User" onCancel={()=>{setShowAdd(false);setForm(BLANK)}}/>}
+    {editUser&&<UserForm title={`Edit User: ${editUser.name}`} onCancel={()=>{setEditUser(null);setForm(BLANK)}}/>}
+
+    <div className="card" style={{padding:0}}>
+      <div className="table-wrap">
+        <table>
+          <thead><tr><th>User</th><th>Role</th><th>Department</th><th>Email</th><th>Mobile</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            {users.map(u=><tr key={u.id}>
+              <td><div style={{display:'flex',alignItems:'center',gap:8}}>
+                <div style={{width:32,height:32,borderRadius:'50%',background:u.color+'22',color:u.color,fontSize:11,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{u.avatar}</div>
+                <div><div style={{fontSize:13,fontWeight:600}}>{u.name}</div><div style={{fontSize:11,color:'var(--text3)'}}>{u.designation}</div></div>
+              </div></td>
+              <td><RoleBadge role={u.role}/></td>
+              <td><span className="tag">{u.dept}</span></td>
+              <td style={{fontSize:12,color:'var(--text2)'}}>{u.email}</td>
+              <td style={{fontSize:12,color:'var(--text2)'}}>{u.mobile}</td>
+              <td><span className={`badge ${u.status==='Active'?'badge-done':'badge-cancelled'}`}>{u.status}</span></td>
+              <td>
+                <div style={{display:'flex',gap:6'}}>
+                  <button className="btn btn-secondary btn-sm" onClick={()=>startEdit(u)}>✏️ Edit</button>
+                  {u.id!=='admin'&&<button className="btn btn-danger btn-sm" onClick={()=>setConfirmDel(u)}>🗑 Delete</button>}
+                </div>
+              </td>
+            </tr>)}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {confirmDel&&<Modal open title="Confirm Delete" onClose={()=>setConfirmDel(null)} width={420}>
+      <div style={{textAlign:'center',padding:'8px 0 20px'}}>
+        <div style={{fontSize:40,marginBottom:12}}>⚠️</div>
+        <div style={{fontSize:16,fontWeight:600,marginBottom:8}}>Delete {confirmDel.name}?</div>
+        <div style={{fontSize:13,color:'var(--text3)',marginBottom:20}}>This action cannot be undone. All user data will be permanently removed.</div>
+        <div style={{display:'flex',gap:8,justifyContent:'center'}}>
+          <button className="btn btn-secondary" onClick={()=>setConfirmDel(null)}>Cancel</button>
+          <button className="btn btn-danger" onClick={()=>deleteUser(confirmDel)}>Yes, Delete</button>
+        </div>
+      </div>
+    </Modal>}
+  </div>
+}
+
+// ─── TASK LIST ────────────────────────────────────────────────
+function TaskList({tasks,setTasks,currentUser,users,setLogs}){
   const [view,setView]=useState('list');
   const [filter,setFilter]=useState({status:'',priority:'',search:''});
   const [showCreate,setShowCreate]=useState(false);
-  const [selectedTask,setSelectedTask]=useState(null);
+  const [selTask,setSelTask]=useState(null);
+  const isAdmin=currentUser.role==='admin';
   const isManager=currentUser.role==='manager';
+  const canDelete=isAdmin||isManager;
+  const canCreate=isAdmin||isManager;
+  const [confirmDel,setConfirmDel]=useState(null);
+
   const filtered=tasks.filter(t=>{
-    if(!isManager&&!t.assignedTo.includes(currentUser.id))return false;
+    if(currentUser.role==='employee'&&!t.assignedTo.includes(currentUser.id))return false;
     if(filter.status&&t.status!==filter.status)return false;
     if(filter.priority&&t.priority!==filter.priority)return false;
     if(filter.search&&!t.title.toLowerCase().includes(filter.search.toLowerCase()))return false;
     return true;
   });
+
   function updateTask(id,updates){
     setTasks(prev=>prev.map(t=>t.id===id?{...t,...updates}:t));
     setLogs(prev=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:currentUser.id,action:`Updated task ${id}`,type:'update'},...prev]);
   }
+  function deleteTask(t){
+    setTasks(prev=>prev.filter(x=>x.id!==t.id));
+    setLogs(prev=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:currentUser.id,action:`Deleted task ${t.id}: ${t.title}`,type:'delete'},...prev]);
+    setConfirmDel(null);
+  }
+
   return <div>
     <div style={{display:'flex',gap:8,marginBottom:16,alignItems:'center',flexWrap:'wrap'}}>
       <div className="search-box" style={{flex:1,minWidth:180}}>
@@ -403,29 +535,29 @@ function TaskList({tasks,setTasks,currentUser,setLogs}){
         <option value="">All Priority</option>{PRIORITIES.map(p=><option key={p}>{p}</option>)}
       </select>
       <div className="tabs" style={{marginBottom:0}}>
-        {['list','kanban'].map(v=><div key={v} className={`tab${view===v?' active':''}`} onClick={()=>setView(v)} style={{padding:'6px 12px',fontSize:12}}>{v==='list'?'📋 List':'🎯 Kanban'}</div>)}
+        {[['list','📋'],['kanban','🎯']].map(([v,ic])=><div key={v} className={`tab${view===v?' active':''}`} onClick={()=>setView(v)} style={{padding:'6px 12px',fontSize:12}}>{ic} {v}</div>)}
       </div>
-      {isManager&&<button className="btn btn-primary btn-sm" onClick={()=>setShowCreate(true)}>+ New Task</button>}
+      {canCreate&&<button className="btn btn-primary btn-sm" onClick={()=>setShowCreate(true)}>+ New Task</button>}
     </div>
+
     {view==='kanban'?
       <div className="kanban">
         {['Pending','In Progress','Waiting for Approval','Completed','Overdue'].map(col=>{
-          const colTasks=filtered.filter(t=>t.status===col);
+          const cols=filtered.filter(t=>t.status===col);
           return <div key={col} className="kanban-col">
-            <div className="kanban-col-header"><StatusBadge status={col}/><span className="kanban-count">{colTasks.length}</span></div>
-            {colTasks.map(t=><div key={t.id} className="kanban-card" onClick={()=>setSelectedTask(t)}>
+            <div className="kanban-col-header"><StatusBadge status={col}/><span className="kanban-count">{cols.length}</span></div>
+            {cols.map(t=><div key={t.id} className="kanban-card" onClick={()=>setSelTask(t)}>
               <div style={{fontSize:11,color:'var(--text3)',marginBottom:4}}>{t.id}</div>
-              <div style={{fontSize:13,fontWeight:600,marginBottom:8}}>{t.title}</div>
-              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+              <div style={{fontSize:13,fontWeight:600,marginBottom:6}}>{t.title}</div>
+              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:6}}>
                 <PriorityBadge p={t.priority}/>
-                <div style={{display:'flex'}}>{t.assignedTo.slice(0,3).map(uid=><Avatar key={uid} user={uid} size={22}/>)}</div>
+                <div style={{display:'flex'}}>{t.assignedTo.slice(0,3).map(uid=><UserAvatar key={uid} userId={uid} users={users} size={22}/>)}</div>
               </div>
-              <div style={{marginTop:8}}>
-                <div className="progress-bar"><div className="progress-fill" style={{width:`${t.progress}%`,background:t.progress===100?'var(--green)':t.progress>50?'var(--blue)':'var(--amber)'}}/></div>
-                <div style={{fontSize:10,color:'var(--text3)',marginTop:2}}>{t.progress}% · Due {fmtDate(t.dueDate)}</div>
-              </div>
+              <div className="progress-bar"><div className="progress-fill" style={{width:`${t.progress}%`,background:t.progress===100?'var(--green)':t.progress>50?'var(--blue)':'var(--amber)'}}/></div>
+              <div style={{fontSize:10,color:'var(--text3)',marginTop:2}}>{t.progress}% · {fmtDate(t.dueDate)}</div>
+              {canDelete&&<button className="btn btn-danger btn-sm" style={{marginTop:8,fontSize:11}} onClick={e=>{e.stopPropagation();setConfirmDel(t)}}>🗑 Delete</button>}
             </div>)}
-            {!colTasks.length&&<div style={{fontSize:12,color:'var(--text3)',textAlign:'center',padding:'20px 0'}}>No tasks</div>}
+            {!cols.length&&<div style={{fontSize:12,color:'var(--text3)',textAlign:'center',padding:'20px 0'}}>No tasks</div>}
           </div>
         })}
       </div>
@@ -433,14 +565,14 @@ function TaskList({tasks,setTasks,currentUser,setLogs}){
       <div className="card" style={{padding:0}}>
         <div className="table-wrap">
           <table>
-            <thead><tr><th>Task ID</th><th>Title</th><th>Priority</th><th>Assigned To</th><th>Due Date</th><th>Progress</th><th>Status</th><th>Action</th></tr></thead>
+            <thead><tr><th>Task ID</th><th>Title</th><th>Priority</th><th>Assigned To</th><th>Due Date</th><th>Progress</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
               {!filtered.length?<tr><td colSpan={8} style={{textAlign:'center',padding:'32px',color:'var(--text3)'}}>No tasks found</td></tr>:
               filtered.map(t=><tr key={t.id}>
                 <td><code style={{fontSize:11,color:'var(--text3)'}}>{t.id}</code></td>
-                <td><div style={{fontSize:13,fontWeight:500,cursor:'pointer',color:'var(--blue)'}} onClick={()=>setSelectedTask(t)}>{t.title}</div><div style={{fontSize:11,color:'var(--text3)'}}>{t.category}</div></td>
+                <td><div style={{fontSize:13,fontWeight:500,cursor:'pointer',color:'var(--blue)'}} onClick={()=>setSelTask(t)}>{t.title}</div><div style={{fontSize:11,color:'var(--text3)'}}>{t.category} · {t.dept}</div></td>
                 <td><PriorityBadge p={t.priority}/></td>
-                <td><div style={{display:'flex'}}>{t.assignedTo.slice(0,3).map(uid=><Avatar key={uid} user={uid} size={26}/>)}</div></td>
+                <td><div style={{display:'flex'}}>{t.assignedTo.slice(0,3).map(uid=><UserAvatar key={uid} userId={uid} users={users} size={26}/>)}</div></td>
                 <td style={{fontSize:12,color:daysDiff(t.dueDate)<0?'var(--red)':daysDiff(t.dueDate)<=3?'var(--amber)':'var(--text2)'}}>{fmtDate(t.dueDate)}</td>
                 <td style={{minWidth:100}}>
                   <div className="progress-bar"><div className="progress-fill" style={{width:`${t.progress}%`,background:t.progress===100?'var(--green)':t.progress>50?'var(--blue)':'var(--amber)'}}/></div>
@@ -448,20 +580,38 @@ function TaskList({tasks,setTasks,currentUser,setLogs}){
                 </td>
                 <td><StatusBadge status={t.status}/></td>
                 <td>
-                  <button className="btn btn-secondary btn-sm" onClick={()=>setSelectedTask(t)}>View</button>
-                  {isManager&&t.status==='Waiting for Approval'&&<button className="btn btn-primary btn-sm" style={{marginLeft:4}} onClick={()=>updateTask(t.id,{status:'Completed',completedDate:new Date().toISOString().slice(0,10)})}>✓</button>}
+                  <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+                    <button className="btn btn-secondary btn-sm" onClick={()=>setSelTask(t)}>✏️ Edit</button>
+                    {(isAdmin||isManager)&&t.status==='Waiting for Approval'&&<button className="btn btn-primary btn-sm" onClick={()=>updateTask(t.id,{status:'Completed',completedDate:new Date().toISOString().slice(0,10)})}>✓ Approve</button>}
+                    {canDelete&&<button className="btn btn-danger btn-sm" onClick={()=>setConfirmDel(t)}>🗑</button>}
+                  </div>
                 </td>
               </tr>)}
             </tbody>
           </table>
         </div>
       </div>}
-    {showCreate&&<CreateTaskModal onClose={()=>setShowCreate(false)} onSave={task=>{setTasks(p=>[task,...p]);setLogs(p=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:currentUser.id,action:`Created task ${task.id}`,type:'assign'},...p]);setShowCreate(false)}}/>}
-    {selectedTask&&<TaskDetailModal task={selectedTask} onClose={()=>setSelectedTask(null)} onUpdate={updates=>{updateTask(selectedTask.id,updates);setSelectedTask(null)}} currentUser={currentUser}/>}
+
+    {showCreate&&<CreateTaskModal onClose={()=>setShowCreate(false)} users={users} currentUser={currentUser} onSave={task=>{setTasks(p=>[task,...p]);setLogs(p=>[{time:new Date().toISOString().slice(0,16).replace('T',' '),user:currentUser.id,action:`Created task ${task.id}: ${task.title}`,type:'assign'},...p]);setShowCreate(false)}}/>}
+    {selTask&&<TaskDetailModal task={selTask} onClose={()=>setSelTask(null)} onUpdate={updates=>{updateTask(selTask.id,updates);setSelTask(null)}} currentUser={currentUser} users={users}/>}
+
+    {confirmDel&&<Modal open title="Delete Task" onClose={()=>setConfirmDel(null)} width={420}>
+      <div style={{textAlign:'center',padding:'8px 0 20px'}}>
+        <div style={{fontSize:40,marginBottom:12}}>🗑️</div>
+        <div style={{fontSize:16,fontWeight:600,marginBottom:8}}>Delete "{confirmDel.title}"?</div>
+        <div style={{fontSize:13,color:'var(--text3)',marginBottom:20}}>This action cannot be undone.</div>
+        <div style={{display:'flex',gap:8,justifyContent:'center'}}>
+          <button className="btn btn-secondary" onClick={()=>setConfirmDel(null)}>Cancel</button>
+          <button className="btn btn-danger" onClick={()=>deleteTask(confirmDel)}>Yes, Delete</button>
+        </div>
+      </div>
+    </Modal>}
   </div>
 }
 
-function CreateTaskModal({onClose,onSave}){
+// ─── CREATE TASK ──────────────────────────────────────────────
+function CreateTaskModal({onClose,onSave,users,currentUser}){
+  const employees=users.filter(u=>u.role!=='admin'&&u.status==='Active');
   const [form,setForm]=useState({title:'',desc:'',category:'Finance',dept:'Finance',priority:'High',assignedTo:[],startDate:'',dueDate:'',expectedHours:8,fy:'2024-25'});
   const [err,setErr]=useState('');
   const f=(k,v)=>setForm(p=>({...p,[k]:v}));
@@ -470,7 +620,7 @@ function CreateTaskModal({onClose,onSave}){
     if(!form.title.trim()){setErr('Title required');return}
     if(!form.assignedTo.length){setErr('Assign to at least one employee');return}
     if(!form.dueDate){setErr('Due date required');return}
-    onSave({...form,id:'T'+String(Math.floor(Math.random()*900)+100),assignedBy:'mgr',assignedDate:new Date().toISOString().slice(0,10),progress:0,status:'Pending',comments:[],attachments:[],reviewNotes:'',actualHours:0,completedDate:null});
+    onSave({...form,id:'T'+String(Math.floor(Math.random()*9000)+1000),assignedBy:currentUser.id,assignedDate:new Date().toISOString().slice(0,10),progress:0,status:'Pending',comments:[],reviewNotes:'',actualHours:0,completedDate:null});
   }
   return <Modal open title="Create New Task" onClose={onClose}>
     <div className="form-group"><label className="form-label">Task Title *</label><input className="input" value={form.title} onChange={e=>f('title',e.target.value)}/></div>
@@ -478,20 +628,21 @@ function CreateTaskModal({onClose,onSave}){
     <div className="grid-2">
       <div className="form-group"><label className="form-label">Category</label><select className="select input" value={form.category} onChange={e=>f('category',e.target.value)}>{CATEGORIES.map(c=><option key={c}>{c}</option>)}</select></div>
       <div className="form-group"><label className="form-label">Department</label><select className="select input" value={form.dept} onChange={e=>f('dept',e.target.value)}>{DEPTS.map(d=><option key={d}>{d}</option>)}</select></div>
-    </div>
-    <div className="grid-2">
       <div className="form-group"><label className="form-label">Priority</label><select className="select input" value={form.priority} onChange={e=>f('priority',e.target.value)}>{PRIORITIES.map(p=><option key={p}>{p}</option>)}</select></div>
       <div className="form-group"><label className="form-label">Due Date *</label><input className="input" type="date" value={form.dueDate} onChange={e=>f('dueDate',e.target.value)}/></div>
+      <div className="form-group"><label className="form-label">Start Date</label><input className="input" type="date" value={form.startDate} onChange={e=>f('startDate',e.target.value)}/></div>
+      <div className="form-group"><label className="form-label">Expected Hours</label><input className="input" type="number" value={form.expectedHours} onChange={e=>f('expectedHours',+e.target.value)}/></div>
     </div>
     <div className="form-group">
       <label className="form-label">Assign To * (select one or more)</label>
       <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
-        {USERS.filter(u=>u.role==='employee').map(u=><div key={u.id} onClick={()=>toggle(u.id)} style={{display:'flex',alignItems:'center',gap:6,padding:'6px 10px',border:`1px solid ${form.assignedTo.includes(u.id)?u.color:'var(--border)'}`,background:form.assignedTo.includes(u.id)?u.color+'15':'var(--bg3)',borderRadius:'var(--radius)',cursor:'pointer'}}>
-          <Avatar user={u} size={22}/><span style={{fontSize:12}}>{u.name.split(' ')[0]}</span>
+        {employees.map(u=><div key={u.id} onClick={()=>toggle(u.id)} style={{display:'flex',alignItems:'center',gap:6,padding:'6px 10px',border:`1px solid ${form.assignedTo.includes(u.id)?u.color:'var(--border)'}`,background:form.assignedTo.includes(u.id)?u.color+'15':'var(--bg3)',borderRadius:'var(--radius)',cursor:'pointer'}}>
+          <div style={{width:22,height:22,borderRadius:'50%',background:u.color+'22',color:u.color,fontSize:9,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{u.avatar}</div>
+          <span style={{fontSize:12}}>{u.name.split(' ')[0]}</span>
         </div>)}
       </div>
     </div>
-    {err&&<div style={{color:'var(--red)',fontSize:12,marginBottom:8}}>{err}</div>}
+    {err&&<div className="alert-error">{err}</div>}
     <div style={{display:'flex',gap:8,justifyContent:'flex-end'}}>
       <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
       <button className="btn btn-primary" onClick={save}>Create Task</button>
@@ -499,70 +650,156 @@ function CreateTaskModal({onClose,onSave}){
   </Modal>
 }
 
-function TaskDetailModal({task,onClose,onUpdate,currentUser}){
+// ─── TASK DETAIL / EDIT ───────────────────────────────────────
+function TaskDetailModal({task,onClose,onUpdate,currentUser,users}){
   const [comment,setComment]=useState('');
-  const [progress,setProgress]=useState(task.progress);
-  const [status,setStatus]=useState(task.status);
-  const [reviewNote,setReviewNote]=useState(task.reviewNotes||'');
+  const [form,setForm]=useState({
+    title:task.title,desc:task.desc,category:task.category,dept:task.dept,
+    priority:task.priority,dueDate:task.dueDate,expectedHours:task.expectedHours,
+    actualHours:task.actualHours,progress:task.progress,status:task.status,
+    reviewNotes:task.reviewNotes||'',assignedTo:task.assignedTo
+  });
   const [comments,setComments]=useState(task.comments||[]);
+  const isAdmin=currentUser.role==='admin';
   const isManager=currentUser.role==='manager';
+  const isAssigned=task.assignedTo.includes(currentUser.id);
+  const canApprove=isAdmin||isManager;
+  const employees=users.filter(u=>u.role!=='admin'&&u.status==='Active');
+
   function addComment(){
     if(!comment.trim())return;
     setComments(p=>[...p,{user:currentUser.id,text:comment,time:new Date().toISOString().slice(0,16).replace('T',' ')}]);
     setComment('');
   }
-  return <Modal open title={`Task — ${task.id}`} onClose={onClose} width={640}>
-    <div style={{background:'var(--bg3)',borderRadius:'var(--radius)',padding:'14px 16px',marginBottom:16}}>
-      <div style={{fontSize:16,fontWeight:700,marginBottom:8}}>{task.title}</div>
-      <div style={{display:'flex',flexWrap:'wrap',gap:8,marginBottom:8}}>
-        <StatusBadge status={task.status}/><PriorityBadge p={task.priority}/>
-        <span className="tag">{task.category}</span><span className="tag">{task.dept}</span>
+  function save(){
+    onUpdate({...form,comments,completedDate:form.status==='Completed'?new Date().toISOString().slice(0,10):task.completedDate});
+  }
+  const toggle=id=>setForm(p=>({...p,assignedTo:p.assignedTo.includes(id)?p.assignedTo.filter(x=>x!==id):[...p.assignedTo,id]}));
+
+  return <Modal open title={`Edit Task — ${task.id}`} onClose={onClose} width={680}>
+    <div className="tabs" style={{marginBottom:16}}>
+      {['details','assignment','comments'].map(t=><div key={t} id={`ttab_${t}`} className="tab" style={{}} onClick={e=>{document.querySelectorAll('[id^=ttab_]').forEach(x=>x.classList.remove('active'));e.target.classList.add('active');document.querySelectorAll('[id^=tpanel_]').forEach(x=>x.style.display='none');document.getElementById(`tpanel_${t}`).style.display='block'}}>{t.charAt(0).toUpperCase()+t.slice(1)}</div>}
+      </div>}
+      <script dangerouslySetInnerHTML={{__html:'document.getElementById("ttab_details").classList.add("active");document.getElementById("tpanel_assignment").style.display="none";document.getElementById("tpanel_comments").style.display="none";'}}/>
+
+    <div id="tpanel_details">
+      <div className="form-group"><label className="form-label">Task Title</label><input className="input" value={form.title} onChange={e=>setForm(f=>({...f,title:e.target.value}))}/></div>
+      <div className="form-group"><label className="form-label">Description</label><textarea className="input" rows={3} value={form.desc} onChange={e=>setForm(f=>({...f,desc:e.target.value}))} style={{resize:'vertical'}}/></div>
+      <div className="grid-2">
+        <div className="form-group"><label className="form-label">Category</label><select className="select input" value={form.category} onChange={e=>setForm(f=>({...f,category:e.target.value}))}>{CATEGORIES.map(c=><option key={c}>{c}</option>)}</select></div>
+        <div className="form-group"><label className="form-label">Department</label><select className="select input" value={form.dept} onChange={e=>setForm(f=>({...f,dept:e.target.value}))}>{DEPTS.map(d=><option key={d}>{d}</option>)}</select></div>
+        <div className="form-group"><label className="form-label">Priority</label><select className="select input" value={form.priority} onChange={e=>setForm(f=>({...f,priority:e.target.value}))}>{PRIORITIES.map(p=><option key={p}>{p}</option>)}</select></div>
+        <div className="form-group"><label className="form-label">Status</label><select className="select input" value={form.status} onChange={e=>setForm(f=>({...f,status:e.target.value}))}>{STATUSES.map(s=><option key={s}>{s}</option>)}</select></div>
+        <div className="form-group"><label className="form-label">Due Date</label><input className="input" type="date" value={form.dueDate} onChange={e=>setForm(f=>({...f,dueDate:e.target.value}))}/></div>
+        <div className="form-group"><label className="form-label">Actual Hours</label><input className="input" type="number" value={form.actualHours} onChange={e=>setForm(f=>({...f,actualHours:+e.target.value}))}/></div>
       </div>
-      <p style={{fontSize:13,color:'var(--text2)'}}>{task.desc||'No description.'}</p>
-    </div>
-    <div className="grid-2" style={{marginBottom:16}}>
-      {[['Assigned By',getUser(task.assignedBy)?.name],['Due Date',fmtDate(task.dueDate)],['Expected Hrs',task.expectedHours+'h'],['Actual Hrs',task.actualHours+'h']].map(([k,v])=><div key={k}>
-        <div style={{fontSize:11,color:'var(--text3)'}}>{k}</div>
-        <div style={{fontSize:13,fontWeight:500,marginTop:2}}>{v}</div>
-      </div>)}
-    </div>
-    <div style={{marginBottom:16}}>
-      <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}>
-        <span style={{fontSize:12,color:'var(--text3)'}}>Progress</span>
-        <span style={{fontSize:12,fontWeight:600,color:'var(--blue)'}}>{progress}%</span>
+      <div className="form-group">
+        <div style={{display:'flex',justifyContent:'space-between',marginBottom:6}}>
+          <label className="form-label" style={{marginBottom:0}}>Progress: {form.progress}%</label>
+        </div>
+        <input type="range" min={0} max={100} step={5} value={form.progress} onChange={e=>setForm(f=>({...f,progress:+e.target.value}))} style={{width:'100%'}}/>
+        <div className="progress-bar" style={{height:8,marginTop:4}}><div className="progress-fill" style={{width:`${form.progress}%`,background:form.progress===100?'var(--green)':form.progress>50?'var(--blue)':'var(--amber)'}}/></div>
       </div>
-      <input type="range" min={0} max={100} step={5} value={progress} onChange={e=>setProgress(+e.target.value)} style={{width:'100%'}}/>
-      <div className="progress-bar" style={{marginTop:4,height:8}}>
-        <div className="progress-fill" style={{width:`${progress}%`,background:progress===100?'var(--green)':progress>50?'var(--blue)':'var(--amber)'}}/>
+      {canApprove&&<div className="form-group"><label className="form-label">Review Notes</label><textarea className="input" rows={2} value={form.reviewNotes} onChange={e=>setForm(f=>({...f,reviewNotes:e.target.value}))} style={{resize:'vertical'}}/></div>}
+    </div>
+
+    <div id="tpanel_assignment" style={{display:'none'}}>
+      <div style={{marginBottom:12,fontSize:13,color:'var(--text2)'}}>Assigned to:</div>
+      <div style={{display:'flex',flexWrap:'wrap',gap:8,marginBottom:16}}>
+        {employees.map(u=><div key={u.id} onClick={()=>toggle(u.id)} style={{display:'flex',alignItems:'center',gap:6,padding:'8px 12px',border:`1px solid ${form.assignedTo.includes(u.id)?u.color:'var(--border)'}`,background:form.assignedTo.includes(u.id)?u.color+'15':'var(--bg3)',borderRadius:'var(--radius)',cursor:'pointer'}}>
+          <div style={{width:26,height:26,borderRadius:'50%',background:u.color+'22',color:u.color,fontSize:10,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{u.avatar}</div>
+          <span style={{fontSize:12,fontWeight:500}}>{u.name}</span>
+          {form.assignedTo.includes(u.id)&&<span style={{color:u.color,fontSize:14}}>✓</span>}
+        </div>)}
       </div>
     </div>
-    <div className="form-group">
-      <label className="form-label">Status</label>
-      <select className="select input" value={status} onChange={e=>setStatus(e.target.value)}>
-        {STATUSES.map(s=><option key={s}>{s}</option>)}
-      </select>
-    </div>
-    {isManager&&<div className="form-group">
-      <label className="form-label">Review Notes</label>
-      <textarea className="input" rows={2} value={reviewNote} onChange={e=>setReviewNote(e.target.value)} style={{resize:'vertical'}}/>
-    </div>}
-    <div style={{marginBottom:16}}>
-      <div style={{fontSize:12,color:'var(--text3)',marginBottom:8}}>Comments ({comments.length})</div>
-      {comments.map((c,i)=><div key={i} style={{display:'flex',gap:8,marginBottom:8,padding:8,background:'var(--bg3)',borderRadius:'var(--radius)'}}>
-        <Avatar user={c.user} size={28}/>
-        <div><div style={{fontSize:12,fontWeight:600}}>{getUser(c.user)?.name} <span style={{fontSize:11,color:'var(--text3)',fontWeight:400}}>{c.time}</span></div>
-        <div style={{fontSize:13,color:'var(--text2)'}}>{c.text}</div></div>
-      </div>)}
+
+    <div id="tpanel_comments" style={{display:'none'}}>
+      <div style={{maxHeight:280,overflowY:'auto',marginBottom:12}}>
+        {!comments.length?<div className="empty-state" style={{padding:'20px 0'}}>No comments yet</div>:
+          comments.map((c,i)=>{const u=users.find(x=>x.id===c.user);return <div key={i} style={{display:'flex',gap:8,marginBottom:10,padding:10,background:'var(--bg3)',borderRadius:'var(--radius)'}}>
+            {u&&<div style={{width:30,height:30,borderRadius:'50%',background:u.color+'22',color:u.color,fontSize:11,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,flexShrink:0}}>{u.avatar}</div>}
+            <div><div style={{fontSize:12,fontWeight:600}}>{u?.name||'Unknown'} <span style={{fontSize:11,color:'var(--text3)',fontWeight:400}}>{c.time}</span></div><div style={{fontSize:13,color:'var(--text2)',marginTop:2}}>{c.text}</div></div>
+          </div>})}
+      </div>
       <div style={{display:'flex',gap:8}}>
-        <input className="input" placeholder="Add comment..." value={comment} onChange={e=>setComment(e.target.value)} onKeyDown={e=>e.key==='Enter'&&addComment()} style={{flex:1}}/>
-        <button className="btn btn-primary btn-sm" onClick={addComment}>Add</button>
+        <input className="input" placeholder="Add a comment..." value={comment} onChange={e=>setComment(e.target.value)} onKeyDown={e=>e.key==='Enter'&&addComment()} style={{flex:1}}/>
+        <button className="btn btn-primary btn-sm" onClick={addComment}>Post</button>
       </div>
     </div>
-    <div style={{display:'flex',gap:8,justifyContent:'flex-end'}}>
+
+    <div style={{display:'flex',gap:8,justifyContent:'flex-end',marginTop:16,paddingTop:16,borderTop:'1px solid var(--border)'}}>
       <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
-      <button className="btn btn-primary" onClick={()=>onUpdate({progress,status,reviewNotes:reviewNote,comments,completedDate:status==='Completed'?new Date().toISOString().slice(0,10):task.completedDate})}>Save Changes</button>
+      <button className="btn btn-primary" onClick={save}>💾 Save Changes</button>
     </div>
   </Modal>
+}
+
+// ─── DASHBOARDS ───────────────────────────────────────────────
+function ManagerDashboard({tasks,logs,users}){
+  const employees=users.filter(u=>u.role==='employee');
+  const st={Pending:0,'In Progress':0,Completed:0,Overdue:0,'Waiting for Approval':0};
+  tasks.forEach(t=>{if(st[t.status]!==undefined)st[t.status]++});
+  const empPerf=employees.map(e=>{
+    const a=tasks.filter(t=>t.assignedTo.includes(e.id));
+    const d=a.filter(t=>t.status==='Completed');
+    const o=a.filter(t=>t.status==='Overdue');
+    return{...e,assigned:a.length,done:d.length,overdue:o.length,rate:a.length?Math.round((d.length/a.length)*100):0};
+  }).sort((a,b)=>b.rate-a.rate);
+  const deptData=DEPTS.slice(0,6).map((d,i)=>({label:d,val:tasks.filter(t=>t.dept===d).length,color:COLORS[i]}));
+  return <div>
+    <div className="grid-4" style={{marginBottom:20}}>
+      {[{l:'Total Tasks',v:tasks.length,ic:'📋',c:'var(--blue)',bg:'rgba(79,142,247,0.1)'},{l:'In Progress',v:st['In Progress'],ic:'⚡',c:'var(--amber)',bg:'rgba(245,158,26,0.1)'},{l:'Completed',v:st.Completed,ic:'✅',c:'var(--green)',bg:'rgba(62,207,106,0.1)'},{l:'Overdue',v:st.Overdue,ic:'🚨',c:'var(--red)',bg:'rgba(240,80,80,0.1)'}].map((m,i)=><div key={i} className="metric-card">
+        <div className="metric-icon" style={{background:m.bg,fontSize:18}}>{m.ic}</div>
+        <div className="metric-label">{m.l}</div>
+        <div className="metric-value" style={{color:m.c}}>{m.v}</div>
+      </div>)}
+    </div>
+    <div className="grid-2" style={{marginBottom:20}}>
+      <div className="card">
+        <div className="card-header"><span className="card-title">Task Status Overview</span></div>
+        <div style={{display:'flex',gap:20,alignItems:'center'}}>
+          <DonutChart values={[st.Pending,st['In Progress'],st.Completed,st.Overdue,st['Waiting for Approval']]} colors={['#f59e1a','#4f8ef7','#3ecf6a','#f05050','#a78bfa']}/>
+          <div style={{flex:1}}>
+            {[['Pending',st.Pending,'#f59e1a'],['In Progress',st['In Progress'],'#4f8ef7'],['Completed',st.Completed,'#3ecf6a'],['Overdue',st.Overdue,'#f05050'],['For Approval',st['Waiting for Approval'],'#a78bfa']].map(([l,v,c])=><div key={l} style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
+              <div style={{width:8,height:8,borderRadius:2,background:c}}/><span style={{fontSize:12,color:'var(--text2)',flex:1}}>{l}</span><span style={{fontSize:13,fontWeight:600}}>{v}</span>
+            </div>)}
+          </div>
+        </div>
+      </div>
+      <div className="card"><div className="card-header"><span className="card-title">Department Workload</span></div><BarChart data={deptData.filter(d=>d.val>0)}/></div>
+    </div>
+    <div className="card" style={{marginBottom:20}}>
+      <div className="card-header"><div><div className="card-title">Employee Performance Rankings</div><div className="card-sub">FY 2024-25</div></div></div>
+      {empPerf.map((e,i)=><div key={e.id} className="employee-perf-row">
+        <div className="rank-badge" style={{background:i===0?'#f59e1a22':i===1?'#9ca3b022':'var(--bg4)',color:i===0?'#f59e1a':i===1?'var(--text3)':'var(--text3)'}}>{i+1}</div>
+        <Avatar user={e} size={32}/>
+        <div style={{flex:1}}><div style={{fontSize:13,fontWeight:600}}>{e.name}</div><div style={{fontSize:11,color:'var(--text3)'}}>{e.dept}</div>
+          <div className="perf-bar" style={{marginTop:4,width:180}}><div className="perf-fill" style={{width:`${e.rate}%`,background:e.rate>=80?'var(--green)':e.rate>=50?'var(--amber)':'var(--red)'}}/></div>
+        </div>
+        <div style={{textAlign:'right'}}><div style={{fontSize:18,fontWeight:700,color:e.rate>=80?'var(--green)':e.rate>=50?'var(--amber)':'var(--red)'}}>{e.rate}%</div><div style={{fontSize:11,color:'var(--text3)'}}>{e.done}/{e.assigned}</div></div>
+      </div>)}
+    </div>
+    <div className="grid-2">
+      <div className="card">
+        <div className="card-header"><span className="card-title">Recent Activity</span></div>
+        {logs.slice(0,5).map((l,i)=>{const u=users.find(x=>x.id===l.user);return <div key={i} className="activity-item">
+          <div className="activity-dot" style={{background:l.type==='task'?'var(--green)':l.type==='assign'?'var(--blue)':l.type==='delete'?'var(--red)':l.type==='admin'?'#ff6b35':'var(--amber)'}}/>
+          <div className="activity-content"><div style={{fontSize:13}}>{l.action}</div><div className="activity-time">{u?.name||l.user} · {l.time}</div></div>
+        </div>})}
+      </div>
+      <div className="card">
+        <div className="card-header"><span className="card-title">Upcoming Deadlines</span></div>
+        {tasks.filter(t=>t.status!=='Completed'&&t.status!=='Cancelled').sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate)).slice(0,5).map(t=>{
+          const d=daysDiff(t.dueDate);
+          return <div key={t.id} className="stat-row">
+            <div><div style={{fontSize:13,fontWeight:500}}>{t.title}</div><div style={{fontSize:11,color:'var(--text3)'}}>{t.dept}</div></div>
+            <div style={{textAlign:'right'}}><div style={{fontSize:12,color:d<0?'var(--red)':d<=3?'var(--amber)':'var(--text3)'}}>{d<0?`${Math.abs(d)}d overdue`:d===0?'Today':`${d}d left`}</div><StatusBadge status={t.status}/></div>
+          </div>
+        })}
+      </div>
+    </div>
+  </div>
 }
 
 function EmployeeDashboard({emp,tasks}){
@@ -578,9 +815,8 @@ function EmployeeDashboard({emp,tasks}){
       <div style={{flex:1}}>
         <div style={{fontSize:20,fontWeight:700}}>{emp.name}</div>
         <div style={{fontSize:13,color:'var(--text3)'}}>{emp.designation} · {emp.dept}</div>
-        <div style={{display:'flex',gap:12,marginTop:8}}>
-          <span className="chip">📧 {emp.email}</span>
-          <span className="chip">📱 {emp.mobile}</span>
+        <div style={{display:'flex',gap:12,marginTop:8,flexWrap:'wrap'}}>
+          <span className="chip">📧 {emp.email}</span><span className="chip">📱 {emp.mobile}</span>
         </div>
       </div>
       <div style={{textAlign:'center',background:'var(--bg3)',borderRadius:'var(--radius2)',padding:'16px 24px'}}>
@@ -597,7 +833,7 @@ function EmployeeDashboard({emp,tasks}){
     </div>
     <div className="card" style={{marginBottom:20}}>
       <div className="card-header"><span className="card-title">My Active Tasks</span></div>
-      {!myTasks.filter(t=>t.status!=='Completed'&&t.status!=='Cancelled').length?<div className="empty-state"><div style={{fontSize:40}}>🎉</div><div>All caught up!</div></div>:
+      {!myTasks.filter(t=>t.status!=='Completed'&&t.status!=='Cancelled').length?<div className="empty-state"><div style={{fontSize:40,marginBottom:8}}>🎉</div>All caught up!</div>:
         myTasks.filter(t=>t.status!=='Completed'&&t.status!=='Cancelled').map(t=><div key={t.id} style={{padding:'12px 0',borderBottom:'1px solid var(--border)'}}>
           <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6}}>
             <div><div style={{fontSize:13,fontWeight:600}}>{t.title}</div><div style={{fontSize:11,color:'var(--text3)'}}>{t.id} · {t.dept}</div></div>
@@ -611,48 +847,22 @@ function EmployeeDashboard({emp,tasks}){
         </div>)}
     </div>
     <div className="grid-2">
-      <div className="card">
-        <div className="card-header"><span className="card-title">Performance Stats</span></div>
-        {[['Tasks Assigned',myTasks.length],['Tasks Completed',done.length],['Pending',pending.length],['Overdue',overdue.length],['Completion Rate',rate+'%']].map(([k,v])=><div key={k} className="stat-row">
-          <span style={{fontSize:13,color:'var(--text2)'}}>{k}</span><span style={{fontSize:13,fontWeight:600}}>{v}</span>
+      <div className="card"><div className="card-header"><span className="card-title">Performance Stats</span></div>
+        {[['Assigned',myTasks.length],['Completed',done.length],['Pending',pending.length],['Overdue',overdue.length],['Completion Rate',rate+'%']].map(([k,v])=><div key={k} className="stat-row"><span style={{fontSize:13,color:'var(--text2)'}}>{k}</span><span style={{fontSize:13,fontWeight:600}}>{v}</span></div>)}
+      </div>
+      <div className="card"><div className="card-header"><span className="card-title">Recently Completed</span></div>
+        {!done.length?<div className="empty-state">No completed tasks yet</div>:done.slice(0,4).map(t=><div key={t.id} className="stat-row">
+          <div><div style={{fontSize:13,fontWeight:500}}>{t.title}</div><div style={{fontSize:11,color:'var(--text3)'}}>{fmtDate(t.completedDate)}</div></div>
+          <StatusBadge status={t.status}/>
         </div>)}
       </div>
-      <div className="card">
-        <div className="card-header"><span className="card-title">Recently Completed</span></div>
-        {!done.length?<div className="empty-state"><div>No completed tasks yet</div></div>:
-          done.slice(0,4).map(t=><div key={t.id} className="stat-row">
-            <div><div style={{fontSize:13,fontWeight:500}}>{t.title}</div><div style={{fontSize:11,color:'var(--text3)'}}>Completed {fmtDate(t.completedDate)}</div></div>
-            <StatusBadge status={t.status}/>
-          </div>)}
-      </div>
     </div>
   </div>
 }
 
-function EmployeesPage(){
-  const [sel,setSel]=useState(null);
-  return <div>
-    <div className="grid-2">
-      {USERS.filter(u=>u.role==='employee').map(e=><div key={e.id} className="card" style={{padding:'14px 16px',cursor:'pointer'}} onClick={()=>setSel(sel===e.id?null:e.id)}>
-        <div style={{display:'flex',gap:12,alignItems:'center',marginBottom:sel===e.id?12:0}}>
-          <div style={{width:44,height:44,borderRadius:'50%',background:e.color+'22',color:e.color,fontSize:16,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{e.avatar}</div>
-          <div style={{flex:1}}><div style={{fontSize:14,fontWeight:700}}>{e.name}</div><div style={{fontSize:12,color:'var(--text3)'}}>{e.designation}</div></div>
-          <div style={{background:e.color+'15',color:e.color,fontSize:11,padding:'3px 8px',borderRadius:20,fontWeight:600}}>{e.dept}</div>
-        </div>
-        {sel===e.id&&<div className="grid-2" style={{gap:8}}>
-          {[['Employee ID',e.id.toUpperCase()],['Mobile',e.mobile],['Email',e.email],['Joining',fmtDate(e.joining)]].map(([k,v])=><div key={k}>
-            <div style={{fontSize:10,color:'var(--text3)'}}>{k}</div>
-            <div style={{fontSize:12,fontWeight:500,marginTop:1}}>{v}</div>
-          </div>)}
-        </div>}
-      </div>)}
-    </div>
-  </div>
-}
-
-function ReportsPage({tasks}){
+function ReportsPage({tasks,users}){
   const [rtype,setRtype]=useState('performance');
-  const employees=USERS.filter(u=>u.role==='employee');
+  const employees=users.filter(u=>u.role==='employee');
   const perfData=employees.map(e=>{
     const et=tasks.filter(t=>t.assignedTo.includes(e.id));
     const done=et.filter(t=>t.status==='Completed');
@@ -669,7 +879,7 @@ function ReportsPage({tasks}){
       <div className="table-wrap"><table>
         <thead><tr><th>Rank</th><th>Employee</th><th>Dept</th><th>Total</th><th>Done</th><th>Overdue</th><th>Rate</th><th>Grade</th></tr></thead>
         <tbody>{perfData.map((e,i)=><tr key={e.id}>
-          <td><div className="rank-badge" style={{background:i<3?'var(--amber)22':'var(--bg4)',color:i<3?'var(--amber)':'var(--text3)'}}>{i+1}</div></td>
+          <td><div className="rank-badge" style={{background:i<3?'#f59e1a22':'var(--bg4)',color:i<3?'#f59e1a':'var(--text3)'}}>{i+1}</div></td>
           <td><div style={{display:'flex',alignItems:'center',gap:8}}><Avatar user={e} size={28}/><div><div style={{fontSize:13,fontWeight:500}}>{e.name}</div><div style={{fontSize:11,color:'var(--text3)'}}>{e.designation}</div></div></div></td>
           <td><span className="tag">{e.dept}</span></td>
           <td>{e.total}</td><td style={{color:'var(--green)',fontWeight:600}}>{e.done}</td><td style={{color:'var(--red)',fontWeight:600}}>{e.overdue}</td>
@@ -686,7 +896,7 @@ function ReportsPage({tasks}){
           <td style={{fontWeight:500}}>{d.dept}</td><td>{d.total}</td>
           <td style={{color:'var(--green)',fontWeight:600}}>{d.done}</td>
           <td style={{color:'var(--amber)',fontWeight:600}}>{d.total-d.done}</td>
-          <td><div style={{display:'flex',alignItems:'center',gap:8}}><div className="progress-bar" style={{width:100}}><div className="progress-fill" style={{width:`${Math.round((d.done/d.total)*100)}%`,background:'var(--blue)'}}/></div><span style={{fontSize:12}}>{Math.round((d.done/d.total)*100)}%</span></div></td>
+          <td><div style={{display:'flex',alignItems:'center',gap:8}}><div className="progress-bar" style={{width:100}}><div className="progress-fill" style={{width:`${d.total?Math.round((d.done/d.total)*100):0}%`,background:'var(--blue)'}}/></div><span>{d.total?Math.round((d.done/d.total)*100):0}%</span></div></td>
         </tr>)}</tbody>
       </table></div>
     </div>}
@@ -694,8 +904,7 @@ function ReportsPage({tasks}){
       <div className="card-header"><div className="card-title">Financial Year Report — FY 2024-25</div></div>
       <div className="grid-4" style={{marginBottom:20}}>
         {[['Total',tasks.length,'var(--blue)'],['Completed',tasks.filter(t=>t.status==='Completed').length,'var(--green)'],['Overdue',tasks.filter(t=>t.status==='Overdue').length,'var(--red)'],['Pending',tasks.filter(t=>t.status==='Pending').length,'var(--amber)']].map(([l,v,c])=><div key={l} style={{background:'var(--bg3)',borderRadius:'var(--radius)',padding:16,textAlign:'center'}}>
-          <div style={{fontSize:28,fontWeight:800,color:c}}>{v}</div>
-          <div style={{fontSize:12,color:'var(--text3)',marginTop:4}}>{l}</div>
+          <div style={{fontSize:28,fontWeight:800,color:c}}>{v}</div><div style={{fontSize:12,color:'var(--text3)',marginTop:4}}>{l}</div>
         </div>)}
       </div>
       <BarChart data={employees.map(e=>({label:e.name.split(' ')[0],val:tasks.filter(t=>t.assignedTo.includes(e.id)&&t.status==='Completed').length,color:e.color}))}/>
@@ -703,8 +912,8 @@ function ReportsPage({tasks}){
   </div>
 }
 
-function AnnouncementsPage({announcements,setAnnouncements,currentUser}){
-  const isManager=currentUser.role==='manager';
+function AnnouncementsPage({announcements,setAnnouncements,currentUser,users}){
+  const canPost=currentUser.role==='admin'||currentUser.role==='manager';
   const [show,setShow]=useState(false);
   const [form,setForm]=useState({title:'',body:'',priority:'Medium'});
   function create(){
@@ -713,8 +922,8 @@ function AnnouncementsPage({announcements,setAnnouncements,currentUser}){
     setForm({title:'',body:'',priority:'Medium'});setShow(false);
   }
   return <div>
-    {isManager&&<button className="btn btn-primary" style={{marginBottom:16}} onClick={()=>setShow(true)}>+ New Announcement</button>}
-    {announcements.map(a=><div key={a.id} className="card" style={{marginBottom:12}}>
+    {canPost&&<button className="btn btn-primary" style={{marginBottom:16}} onClick={()=>setShow(true)}>+ New Announcement</button>}
+    {announcements.map(a=>{const poster=users.find(u=>u.id===a.by);return <div key={a.id} className="card" style={{marginBottom:12}}>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8}}>
         <div style={{fontSize:16,fontWeight:700}}>{a.title}</div>
         <div style={{display:'flex',gap:8,alignItems:'center'}}>
@@ -723,11 +932,11 @@ function AnnouncementsPage({announcements,setAnnouncements,currentUser}){
         </div>
       </div>
       <p style={{fontSize:13,color:'var(--text2)',lineHeight:1.6}}>{a.body}</p>
-      <div style={{marginTop:8,display:'flex',alignItems:'center',gap:6}}>
-        <Avatar user={a.by} size={20}/>
-        <span style={{fontSize:11,color:'var(--text3)'}}>Posted by {getUser(a.by)?.name}</span>
-      </div>
-    </div>)}
+      {poster&&<div style={{marginTop:8,display:'flex',alignItems:'center',gap:6}}>
+        <div style={{width:20,height:20,borderRadius:'50%',background:poster.color+'22',color:poster.color,fontSize:8,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{poster.avatar}</div>
+        <span style={{fontSize:11,color:'var(--text3)'}}>Posted by {poster.name}</span>
+      </div>}
+    </div>})}
     {show&&<Modal open title="New Announcement" onClose={()=>setShow(false)}>
       <div className="form-group"><label className="form-label">Title</label><input className="input" value={form.title} onChange={e=>setForm(p=>({...p,title:e.target.value}))}/></div>
       <div className="form-group"><label className="form-label">Message</label><textarea className="input" rows={4} value={form.body} onChange={e=>setForm(p=>({...p,body:e.target.value}))} style={{resize:'vertical'}}/></div>
@@ -740,21 +949,24 @@ function AnnouncementsPage({announcements,setAnnouncements,currentUser}){
   </div>
 }
 
-function ActivityLogPage({logs}){
+function ActivityLogPage({logs,users}){
   return <div className="card" style={{padding:0}}>
     <div className="table-wrap"><table>
       <thead><tr><th>Time</th><th>User</th><th>Action</th><th>Type</th></tr></thead>
-      <tbody>{logs.map((l,i)=><tr key={i}>
+      <tbody>{logs.map((l,i)=>{const u=users.find(x=>x.id===l.user);return <tr key={i}>
         <td style={{fontSize:12,color:'var(--text3)',whiteSpace:'nowrap'}}>{l.time}</td>
-        <td><div style={{display:'flex',alignItems:'center',gap:8}}><Avatar user={l.user} size={24}/><span style={{fontSize:13}}>{getUser(l.user)?.name}</span></div></td>
+        <td><div style={{display:'flex',alignItems:'center',gap:8}}>{u&&<div style={{width:24,height:24,borderRadius:'50%',background:u.color+'22',color:u.color,fontSize:9,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{u.avatar}</div>}<span style={{fontSize:13}}>{u?.name||l.user}</span></div></td>
         <td style={{fontSize:13}}>{l.action}</td>
-        <td><span className={`badge badge-${l.type==='task'?'done':l.type==='assign'?'progress':l.type==='comment'?'pending':'approval'}`}>{l.type}</span></td>
-      </tr>)}</tbody>
+        <td><span className={`badge badge-${l.type==='task'?'done':l.type==='assign'?'progress':l.type==='delete'?'overdue':l.type==='admin'?'approval':l.type==='profile'?'pending':'cancelled'}`}>{l.type}</span></td>
+      </tr>})}
+      </tbody>
     </table></div>
   </div>
 }
 
+// ─── MAIN APP ─────────────────────────────────────────────────
 function App(){
+  const [users,setUsers]=useState(INIT_USERS);
   const [currentUser,setCurrentUser]=useState(null);
   const [tasks,setTasks]=useState(INIT_TASKS);
   const [logs,setLogs]=useState(INIT_LOGS);
@@ -762,33 +974,42 @@ function App(){
   const [page,setPage]=useState('dashboard');
   const [notifOpen,setNotifOpen]=useState(false);
   const [collapsed,setCollapsed]=useState(false);
-  if(!currentUser)return <LoginScreen onLogin={u=>{setCurrentUser(u);setPage('dashboard')}}/>;
+
+  if(!currentUser)return <LoginScreen onLogin={u=>{setCurrentUser(u);setPage('dashboard')}} users={users}/>;
+
+  const isAdmin=currentUser.role==='admin';
   const isManager=currentUser.role==='manager';
-  const myTasks=isManager?tasks:tasks.filter(t=>t.assignedTo.includes(currentUser.id));
+  const isEmployee=currentUser.role==='employee';
+  const myTasks=isEmployee?tasks.filter(t=>t.assignedTo.includes(currentUser.id)):tasks;
   const overdueCount=myTasks.filter(t=>t.status==='Overdue').length;
   const pendingApproval=tasks.filter(t=>t.status==='Waiting for Approval').length;
-  const notifCount=overdueCount+(isManager?pendingApproval:0);
-  const navItems=isManager?[
-    {id:'dashboard',label:'Dashboard',icon:'📊'},
-    {id:'tasks',label:'All Tasks',icon:'📋',badge:pendingApproval||null},
-    {id:'employees',label:'Employees',icon:'👥'},
-    {id:'reports',label:'Reports',icon:'📈'},
+  const notifCount=overdueCount+((isAdmin||isManager)?pendingApproval:0);
+
+  const navItems=[
+    ...(isAdmin?[{id:'dashboard',label:'Admin Dashboard',icon:'👑'}]:[]),
+    ...(!isAdmin?[{id:'dashboard',label:'Dashboard',icon:'📊'}]:[]),
+    {id:'tasks',label:isEmployee?'My Tasks':'All Tasks',icon:'📋',badge:isEmployee?overdueCount||(null):(isAdmin||isManager)?pendingApproval||null:null},
+    ...(isAdmin?[{id:'users',label:'User Management',icon:'👥',badge:null}]:[]),
+    ...(!isEmployee&&!isAdmin?[{id:'employees',label:'Employees',icon:'👥'}]:[]),
+    ...(!isEmployee?[{id:'reports',label:'Reports',icon:'📈'}]:[]),
     {id:'announcements',label:'Announcements',icon:'📢'},
-    {id:'logs',label:'Activity Log',icon:'🗓'},
-  ]:[
-    {id:'dashboard',label:'Dashboard',icon:'📊'},
-    {id:'tasks',label:'My Tasks',icon:'📋',badge:overdueCount||null},
-    {id:'announcements',label:'Announcements',icon:'📢'},
+    ...(!isEmployee?[{id:'logs',label:'Activity Log',icon:'🗓'}]:[]),
+    {id:'profile',label:'My Profile',icon:'⚙️'},
   ];
+
   const notifs=[
     ...tasks.filter(t=>t.status==='Overdue').map(t=>({id:t.id,text:`Overdue: ${t.title}`,type:'overdue',unread:true})),
-    ...tasks.filter(t=>t.status==='Waiting for Approval').map(t=>({id:t.id+'a',text:`Awaiting approval: ${t.title}`,type:'approval',unread:true})),
+    ...((isAdmin||isManager)?tasks.filter(t=>t.status==='Waiting for Approval').map(t=>({id:t.id+'a',text:`Awaiting approval: ${t.title}`,type:'approval',unread:true})):[]),
   ];
+
+  const roleBg={admin:'rgba(255,107,53,0.15)',manager:'rgba(79,142,247,0.15)',employee:'rgba(62,207,106,0.15)'};
+  const roleColor={admin:'#ff6b35',manager:'var(--blue)',employee:'var(--green)'};
+
   return <div id="app">
     <div className={`sidebar${collapsed?' collapsed':''}`}>
       <div className="sidebar-brand">
         <div className="brand-icon">📊</div>
-        {!collapsed&&<div className="brand-text">SmartWork<div className="brand-sub">v2.0 · FY 2024-25</div></div>}
+        {!collapsed&&<div className="brand-text">SmartWork<div className="brand-sub">v3.0 · FY 2024-25</div></div>}
       </div>
       <div className="sidebar-nav">
         {navItems.map(item=><div key={item.id} className={`nav-item${page===item.id?' active':''}`} onClick={()=>setPage(item.id)}>
@@ -797,43 +1018,64 @@ function App(){
         </div>)}
       </div>
       <div className="sidebar-user">
-        <div className="user-card" onClick={()=>setCurrentUser(null)}>
+        <div className="user-card" onClick={()=>setPage('profile')}>
           <div className="user-avatar" style={{background:currentUser.color+'22',color:currentUser.color}}>{currentUser.avatar}</div>
-          {!collapsed&&<div style={{overflow:'hidden'}}>
+          {!collapsed&&<div style={{overflow:'hidden',flex:1}}>
             <div className="user-name">{currentUser.name}</div>
-            <div className="user-role">{currentUser.role==='manager'?'👔 Manager':'👤 '+currentUser.dept} · Logout</div>
+            <div className="user-role" style={{display:'flex',alignItems:'center',gap:4}}>
+              <span style={{fontSize:10,background:roleBg[currentUser.role],color:roleColor[currentUser.role],padding:'1px 6px',borderRadius:8,fontWeight:600}}>{currentUser.role.toUpperCase()}</span>
+            </div>
           </div>}
         </div>
+        {!collapsed&&<button className="btn btn-secondary" style={{width:'100%',marginTop:6,fontSize:12,padding:'7px'}} onClick={()=>setCurrentUser(null)}>🚪 Logout</button>}
       </div>
     </div>
+
     <div className="main">
       <div className="topbar">
-        <button className="btn-icon" onClick={()=>setCollapsed(p=>!p)}>{collapsed?'→':'☰'}</button>
+        <button className="btn-icon" onClick={()=>setCollapsed(p=>!p)} style={{fontSize:18}}>{collapsed?'→':'☰'}</button>
         <div className="page-title">{navItems.find(n=>n.id===page)?.label||page}</div>
         <div className="topbar-actions">
-          <span style={{fontSize:12,color:'var(--text3)'}}>{new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</span>
+          <span style={{fontSize:12,color:'var(--text3)',display:'none'}}>{new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</span>
+          <div style={{background:roleBg[currentUser.role],color:roleColor[currentUser.role],padding:'4px 10px',borderRadius:20,fontSize:11,fontWeight:700}}>{currentUser.role.toUpperCase()}</div>
           <div style={{position:'relative'}}>
             <button className="btn-icon" onClick={()=>setNotifOpen(p=>!p)}>🔔</button>
             {notifCount>0&&<div className="notification-dot"/>}
           </div>
         </div>
       </div>
+
       <div className="content">
-        {page==='dashboard'&&(isManager?<ManagerDashboard tasks={tasks} logs={logs}/>:<EmployeeDashboard emp={currentUser} tasks={tasks}/>)}
-        {page==='tasks'&&<TaskList tasks={tasks} setTasks={setTasks} currentUser={currentUser} setLogs={setLogs}/>}
-        {page==='employees'&&isManager&&<EmployeesPage/>}
-        {page==='reports'&&isManager&&<ReportsPage tasks={tasks}/>}
-        {page==='announcements'&&<AnnouncementsPage announcements={announcements} setAnnouncements={setAnnouncements} currentUser={currentUser}/>}
-        {page==='logs'&&isManager&&<ActivityLogPage logs={logs}/>}
+        {page==='dashboard'&&(isAdmin?<ManagerDashboard tasks={tasks} logs={logs} users={users}/>:isManager?<ManagerDashboard tasks={tasks} logs={logs} users={users}/>:<EmployeeDashboard emp={currentUser} tasks={tasks}/>)}
+        {page==='tasks'&&<TaskList tasks={tasks} setTasks={setTasks} currentUser={currentUser} users={users} setLogs={setLogs}/>}
+        {page==='users'&&isAdmin&&<AdminUsersPage users={users} setUsers={setUsers} setLogs={setLogs}/>}
+        {page==='employees'&&!isEmployee&&!isAdmin&&<div className="grid-2">
+          {users.filter(u=>u.role==='employee').map(e=><div key={e.id} className="card" style={{padding:'14px 16px'}}>
+            <div style={{display:'flex',gap:12,alignItems:'center'}}>
+              <div style={{width:44,height:44,borderRadius:'50%',background:e.color+'22',color:e.color,fontSize:16,display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700}}>{e.avatar}</div>
+              <div style={{flex:1}}><div style={{fontSize:14,fontWeight:700}}>{e.name}</div><div style={{fontSize:12,color:'var(--text3)'}}>{e.designation}</div></div>
+              <span className={`badge ${e.status==='Active'?'badge-done':'badge-cancelled'}`}>{e.status}</span>
+            </div>
+            <div className="grid-2" style={{gap:8,marginTop:12}}>
+              {[['Dept',e.dept],['Mobile',e.mobile],['Email',e.email],['Joined',fmtDate(e.joining)]].map(([k,v])=><div key={k}><div style={{fontSize:10,color:'var(--text3)'}}>{k}</div><div style={{fontSize:12,fontWeight:500,marginTop:1}}>{v}</div></div>)}
+            </div>
+          </div>)}
+        </div>}
+        {page==='reports'&&!isEmployee&&<ReportsPage tasks={tasks} users={users}/>}
+        {page==='announcements'&&<AnnouncementsPage announcements={announcements} setAnnouncements={setAnnouncements} currentUser={currentUser} users={users}/>}
+        {page==='logs'&&!isEmployee&&<ActivityLogPage logs={logs} users={users}/>}
+        {page==='profile'&&<ProfilePage currentUser={currentUser} users={users} setUsers={setUsers} setLogs={setLogs} onUserUpdate={u=>setCurrentUser(u)}/>}
       </div>
     </div>
+
     <div className={`notif-panel${notifOpen?' open':''}`}>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
-        <div style={{fontSize:15,fontWeight:700}}>Notifications</div>
-        <button className="btn-icon" onClick={()=>setNotifOpen(false)} style={{width:28,height:28}}>✕</button>
+        <div style={{fontSize:15,fontWeight:700}}>Notifications {notifCount>0&&<span style={{background:'var(--red)',color:'white',fontSize:11,padding:'2px 7px',borderRadius:10,marginLeft:6}}>{notifCount}</span>}</div>
+        <button className="btn-icon" onClick={()=>setNotifOpen(false)} style={{width:28,height:28,fontSize:14}}>✕</button>
       </div>
       {notifs.length?notifs.map(n=><div key={n.id} className={`notif-item${n.unread?' unread':''}`}>
         <div style={{fontSize:13,fontWeight:500}}>{n.type==='overdue'?'🚨':n.type==='approval'?'✅':'ℹ️'} {n.text}</div>
+        <div style={{fontSize:11,color:'var(--text3)',marginTop:4}}>{n.type==='overdue'?'Task is overdue':n.type==='approval'?'Pending your approval':''}</div>
       </div>):<div style={{fontSize:13,color:'var(--text3)',textAlign:'center',padding:20}}>No new notifications</div>}
     </div>
     {notifOpen&&<div style={{position:'fixed',inset:0,zIndex:499}} onClick={()=>setNotifOpen(false)}/>}
@@ -841,7 +1083,6 @@ function App(){
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
-
 </script>
 </body>
 </html>
