@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- SmartWork v8.3 FY2026-27 Build: 1789620977 -->
+<!-- SmartWork v8.4 Light Peacock Theme Build: 1789623701 -->
 <meta charset="UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -12,24 +12,73 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg:#0d0f14;--bg2:#13161e;--bg3:#1a1e29;--bg4:#222736;
---border:#2a2f3d;--border2:#363c4f;
---text:#e8eaf0;--text2:#9ca3b0;--text3:#5c6272;
---blue:#4f8ef7;--blue2:#3a6fd4;--blue3:#1a3a7a;
---green:#3ecf6a;--green2:#2aaa52;--green3:#1a4a28;
---amber:#f59e1a;--amber2:#d4830e;--amber3:#5a3500;
---red:#f05050;--red2:#c73535;--red3:#4a1515;
---purple:#a78bfa;--purple2:#7c5cd4;--purple3:#2d1f5a;
---teal:#2dd4bf;--teal2:#14a898;--teal3:#0a3a35;
+/* Rich light peacock theme - soft on the eyes */
+--bg:#f4f1ea;--bg2:#ffffff;--bg3:#f0ede4;--bg4:#e6e1d5;
+--border:#ddd6c8;--border2:#c9c0ad;
+--text:#2b2a26;--text2:#5c5849;--text3:#8a8574;
+--blue:#1a6f8b;--blue2:#155a72;--blue3:#d4e8ef;
+--green:#1f8a5b;--green2:#186f49;--green3:#d6efe2;
+--amber:#c47f14;--amber2:#a5690c;--amber3:#f6e8cf;
+--red:#c43d3d;--red2:#a52f2f;--red3:#f6dada;
+--purple:#6d4aa8;--purple2:#573a87;--purple3:#e7ddf3;
+--teal:#0f8c86;--teal2:#0b6f6a;--teal3:#d3efec;
 --radius:8px;--radius2:12px;--radius3:16px;
---shadow:0 4px 24px rgba(0,0,0,0.4);
+--shadow:0 4px 20px rgba(26,111,139,0.10);
+/* peacock accent gradient */
+--peacock:linear-gradient(135deg,#0f8c86 0%,#1a6f8b 40%,#6d4aa8 100%);
 }
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body{
+  font-family:'DM Sans',sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(15,140,134,0.10) 0%, transparent 42%),
+    radial-gradient(circle at 88% 82%, rgba(109,74,168,0.09) 0%, transparent 45%),
+    radial-gradient(circle at 75% 12%, rgba(26,111,139,0.08) 0%, transparent 40%),
+    linear-gradient(135deg, #f6f3ec 0%, #eef1ec 50%, #f3f0e8 100%);
+  background-attachment:fixed;
+  position:relative;
+}
+/* ── Mor Pankh (peacock feather) watermark ── */
+body::before{
+  content:"";
+  position:fixed;
+  right:-40px;
+  bottom:-30px;
+  width:min(46vw,560px);
+  height:min(70vh,820px);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" fill="none"> <defs> <radialGradient id="eye" cx="50%" cy="42%" r="55%"> <stop offset="0%" stop-color="%231a3a5c"/> <stop offset="35%" stop-color="%23155a72"/> <stop offset="60%" stop-color="%230f8c86"/> <stop offset="100%" stop-color="%23c47f14"/> </radialGradient> <linearGradient id="barb" x1="0" y1="0" x2="0" y2="1"> <stop offset="0%" stop-color="%230f8c86"/> <stop offset="100%" stop-color="%231a6f8b"/> </linearGradient> </defs> <path d="M100 315 C100 260 98 180 100 140" stroke="%230b6f6a" stroke-width="3" stroke-linecap="round"/> <g stroke="url(%23barb)" stroke-width="1.6" stroke-linecap="round" opacity="0.85"> <path d="M100 150 C70 140 50 120 38 96"/> <path d="M100 150 C74 132 58 108 50 82"/> <path d="M100 148 C80 124 70 96 66 70"/> <path d="M100 146 C90 118 86 90 86 62"/> <path d="M100 150 C130 140 150 120 162 96"/> <path d="M100 150 C126 132 142 108 150 82"/> <path d="M100 148 C120 124 130 96 134 70"/> <path d="M100 146 C110 118 114 90 114 62"/> <path d="M100 145 C100 116 100 88 100 58"/> </g> <ellipse cx="100" cy="112" rx="52" ry="66" fill="%236d4aa8" opacity="0.28"/> <ellipse cx="100" cy="108" rx="42" ry="54" fill="url(%23eye)"/> <ellipse cx="100" cy="104" rx="26" ry="34" fill="%23134a6b"/> <ellipse cx="100" cy="100" rx="15" ry="21" fill="%230f8c86"/> <ellipse cx="100" cy="98" rx="8" ry="12" fill="%231a3a5c"/> <ellipse cx="100" cy="94" rx="4" ry="6" fill="%23c9a227"/> </svg>");
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:bottom right;
+  opacity:0.13;
+  pointer-events:none;
+  z-index:0;
+  transform:rotate(-8deg);
+}
+body::after{
+  content:"";
+  position:fixed;
+  left:-60px;
+  top:-40px;
+  width:min(30vw,360px);
+  height:min(48vh,560px);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" fill="none"> <defs> <radialGradient id="eye" cx="50%" cy="42%" r="55%"> <stop offset="0%" stop-color="%231a3a5c"/> <stop offset="35%" stop-color="%23155a72"/> <stop offset="60%" stop-color="%230f8c86"/> <stop offset="100%" stop-color="%23c47f14"/> </radialGradient> <linearGradient id="barb" x1="0" y1="0" x2="0" y2="1"> <stop offset="0%" stop-color="%230f8c86"/> <stop offset="100%" stop-color="%231a6f8b"/> </linearGradient> </defs> <path d="M100 315 C100 260 98 180 100 140" stroke="%230b6f6a" stroke-width="3" stroke-linecap="round"/> <g stroke="url(%23barb)" stroke-width="1.6" stroke-linecap="round" opacity="0.85"> <path d="M100 150 C70 140 50 120 38 96"/> <path d="M100 150 C74 132 58 108 50 82"/> <path d="M100 148 C80 124 70 96 66 70"/> <path d="M100 146 C90 118 86 90 86 62"/> <path d="M100 150 C130 140 150 120 162 96"/> <path d="M100 150 C126 132 142 108 150 82"/> <path d="M100 148 C120 124 130 96 134 70"/> <path d="M100 146 C110 118 114 90 114 62"/> <path d="M100 145 C100 116 100 88 100 58"/> </g> <ellipse cx="100" cy="112" rx="52" ry="66" fill="%236d4aa8" opacity="0.28"/> <ellipse cx="100" cy="108" rx="42" ry="54" fill="url(%23eye)"/> <ellipse cx="100" cy="104" rx="26" ry="34" fill="%23134a6b"/> <ellipse cx="100" cy="100" rx="15" ry="21" fill="%230f8c86"/> <ellipse cx="100" cy="98" rx="8" ry="12" fill="%231a3a5c"/> <ellipse cx="100" cy="94" rx="4" ry="6" fill="%23c9a227"/> </svg>");
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:top left;
+  opacity:0.08;
+  pointer-events:none;
+  z-index:0;
+  transform:rotate(165deg);
+}
+#app,.login-screen{position:relative;z-index:1}
 #app{display:flex;height:100vh;overflow:hidden}
-.sidebar{width:240px;min-width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;transition:width 0.3s}
+.sidebar{width:240px;min-width:240px;background:linear-gradient(180deg,#ffffff 0%,#f4f6f3 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;transition:width 0.3s;box-shadow:2px 0 16px rgba(26,111,139,0.05);position:relative;z-index:2}
 .sidebar.collapsed{width:64px;min-width:64px}
 .sidebar-brand{padding:20px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
-.brand-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.brand-icon{width:36px;height:36px;background:var(--peacock);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .brand-text{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden}
 .brand-sub{font-size:10px;color:var(--text3);font-weight:400}
 .sidebar-nav{flex:1;padding:12px 8px;overflow-y:auto}
@@ -44,11 +93,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .user-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .user-role{font-size:11px;color:var(--text3)}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topbar{padding:16px 24px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px}
+.topbar{padding:16px 24px;background:rgba(255,255,255,0.9);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;backdrop-filter:blur(6px);position:relative;z-index:2}
 .page-title{font-size:18px;font-weight:700;flex:1}
 .topbar-actions{display:flex;align-items:center;gap:10px}
 .btn{padding:8px 16px;border-radius:var(--radius);border:none;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.15s;font-family:inherit}
-.btn-primary{background:var(--blue);color:white}.btn-primary:hover{background:var(--blue2)}
+.btn-primary{background:var(--peacock);color:white;box-shadow:0 2px 8px rgba(15,140,134,0.25)}.btn-primary:hover{filter:brightness(1.08)}
 .btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border2)}.btn-secondary:hover{background:var(--bg4)}
 .btn-danger{background:var(--red);color:white}.btn-danger:hover{background:var(--red2)}
 .btn-sm{padding:5px 12px;font-size:12px}
@@ -57,11 +106,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .content{flex:1;overflow-y:auto;padding:24px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:20px}
+.card{background:rgba(255,255,255,0.92);border:1px solid var(--border);border-radius:var(--radius2);padding:20px;box-shadow:0 2px 12px rgba(26,111,139,0.06);backdrop-filter:blur(2px)}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .card-title{font-size:14px;font-weight:600}
 .card-sub{font-size:12px;color:var(--text3);margin-top:2px}
-.metric-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;position:relative;overflow:hidden}
+.metric-card{background:rgba(255,255,255,0.94);border:1px solid var(--border);border-radius:var(--radius2);padding:18px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(26,111,139,0.06)}
 .metric-label{font-size:12px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
 .metric-value{font-size:28px;font-weight:700;margin:4px 0 2px;line-height:1}
 .metric-icon{position:absolute;right:16px;top:16px;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
@@ -78,7 +127,7 @@ table{width:100%;border-collapse:collapse}
 th{font-size:11px;color:var(--text3);padding:8px 12px;text-align:left;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
 td{padding:11px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(255,255,255,0.02)}
+tr:hover td{background:rgba(15,140,134,0.05)}
 .progress-bar{height:6px;background:var(--bg4);border-radius:3px;overflow:hidden}
 .progress-fill{height:100%;border-radius:3px;transition:width 0.3s}
 .avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
@@ -89,7 +138,7 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 .form-group{margin-bottom:14px}
 .form-label{display:block;font-size:12px;color:var(--text3);margin-bottom:5px;font-weight:500}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
-.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius3);padding:24px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow)}
+.modal{background:#ffffff;border:1px solid var(--border2);border-radius:var(--radius3);padding:24px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow)}
 .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .modal-title{font-size:17px;font-weight:700}
 .tabs{display:flex;gap:4px;background:var(--bg3);padding:4px;border-radius:var(--radius);margin-bottom:20px}
@@ -108,10 +157,10 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 .kanban-count{background:var(--bg4);color:var(--text3);font-size:11px;padding:2px 7px;border-radius:10px}
 .kanban-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.15s}
 .kanban-card:hover{border-color:var(--border2);transform:translateY(-1px)}
-.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:20px}
-.login-card{width:100%;max-width:440px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius3);padding:36px}
+.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-card{width:100%;max-width:440px;background:rgba(255,255,255,0.96);border:1px solid var(--border);border-radius:var(--radius3);padding:36px;box-shadow:0 12px 48px rgba(26,111,139,0.14);backdrop-filter:blur(4px)}
 .login-brand{text-align:center;margin-bottom:28px}
-.login-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px}
+.login-icon{width:56px;height:56px;background:var(--peacock);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px}
 .user-btn{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:10px;cursor:pointer;transition:all 0.15s;text-align:center}
 .user-btn:hover{border-color:var(--blue);background:rgba(79,142,247,0.05)}
 .user-btn.selected{border-color:var(--blue);background:rgba(79,142,247,0.1)}
